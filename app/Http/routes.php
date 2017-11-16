@@ -10,5 +10,5 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', 'WelcomeController@index');
+/** @var \Illuminate\Routing\Router $router */
+$router->get('/', 'WelcomeController@index');
