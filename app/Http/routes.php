@@ -11,4 +11,9 @@
 |
 */
 /** @var \Illuminate\Routing\Router $router */
-$router->get('/', 'WelcomeController@index');
+$router->get('/', ['as' => 'root', 'uses' => 'WelcomeController@index']);
+$router->group(['prefix' => '/template', 'middleware' => 'debug'], function () use ($router) {
+    $router->get('/boilerplate', 'TemplateController@boilerplate');
+    $router->get('/bootstrap', 'TemplateController@bootstrap');
+    $router->get('/adminlte', 'TemplateController@adminlte');
+});
