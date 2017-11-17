@@ -3,7 +3,8 @@ module.exports = {
     {
         return [
             (negated ? '!' : '') + './node_modules/jquery/dist/**' + (mime === null ? '' : '/' + mime),
-            (negated ? '!' : '') + './node_modules/html5-boilerplate/dist/**' + (mime === null ? '' : '/' + mime),
+            (negated ? '!' : '') + './node_modules/html5-boilerplate/dist/css/**' + (mime === null ? '' : '/' + mime),
+            (negated ? '!' : '') + './node_modules/html5-boilerplate/dist/js/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/bootstrap/dist/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/popper.js/dist/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/font-awesome/css/**' + (mime === null ? '' : '/' + mime),
