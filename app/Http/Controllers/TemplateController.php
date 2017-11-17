@@ -17,10 +17,4 @@ class TemplateController extends Controller
     {
         return view('template.adminlte');
     }
-
-    public function semantic()
-    {
-        return view('template.semantic');
-    }
-
 }
