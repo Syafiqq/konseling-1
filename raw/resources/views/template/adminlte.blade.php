@@ -1,4 +1,5 @@
 <!doctype html>
+<!--suppress HtmlUnknownTarget -->
 <html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
@@ -103,8 +104,5 @@
 <script type="text/javascript" src="/assets/vendor/fastclick/lib/fastclick.min.js"></script>
 {{-- Adminlte --}}
 <script type="text/javascript" src="/assets/vendor/admin-lte/dist/js/adminlte.min.js"></script>
-{{-- Custom --}}
-<script type="text/javascript" src="/assets/js/template/adminlte/template-adminlte.min.js"></script>
-<script type="text/javascript" src="/assets/js/common/service-worker-logging.min.js"></script>
 </body>
 </html>
