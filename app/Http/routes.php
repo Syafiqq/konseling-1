@@ -17,3 +17,8 @@ $router->group(['prefix' => '/template', 'middleware' => 'debug'], function () u
     $router->get('/bootstrap', 'TemplateController@bootstrap');
     $router->get('/adminlte', 'TemplateController@adminlte');
 });
+$router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function () use ($router) {
+    $router->group(['prefix' => '/auth'], function () use ($router) {
+        $router->get('/register', ['as' => 'counselor.auth.register', 'uses' => 'Auth@register']);
+    });
+});
