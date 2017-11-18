@@ -5,5 +5,9 @@ use App\Http\Controllers\Controller;
 class Auth extends Controller
 {
 
+    public function login()
+    {
+
+    }
 
 }
