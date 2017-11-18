@@ -9,4 +9,15 @@ abstract class Controller extends BaseController
 
     use DispatchesCommands, ValidatesRequests;
 
+    protected $theme;
+
+    /**
+     * Controller constructor.
+     */
+    public function __construct()
+    {
+        $this->theme = 'default';
+    }
+
+
 }
