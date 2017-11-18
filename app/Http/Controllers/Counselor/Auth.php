@@ -10,4 +10,9 @@ class Auth extends Controller
 
     }
 
+    public function register()
+    {
+
+    }
+
 }
