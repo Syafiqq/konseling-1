@@ -22,7 +22,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
 {!! nl2br(PHP_EOL) !!}
 {!! $form->input('password','password', null, ['placeholder' => 'Password', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('password','passowrd_conf', null, ['placeholder' => 'Ulangi Password', 'required'=> true]) !!}
+{!! $form->input('password','password_confirmation', null, ['placeholder' => 'Ulangi Password', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
 {!! $form->input('text','token', null, ['placeholder' => 'Kode Registrasi', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
