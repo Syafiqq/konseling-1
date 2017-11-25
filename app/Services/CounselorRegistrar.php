@@ -10,7 +10,7 @@
 namespace App\Services;
 
 
-use App\Eloquent\CounselorAccount;
+use App\Eloquent\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,9 +29,10 @@ class CounselorRegistrar implements Registrar
         $validator = Validator::getFacadeRoot();
 
         return $validator->make($data, [
-            'credential' => 'required|max:100|unique:counselor_accounts',
+            'credential' => 'required|max:100|unique:users',
             'name' => 'required|max:100',
             'gender' => 'required|in:male,female',
+            'role' => 'required|in:counselor',
             'password' => 'required|confirmed|min:8',
         ]);
     }
@@ -45,14 +46,15 @@ class CounselorRegistrar implements Registrar
     public function create(array $data)
     {
         /** @var \Illuminate\Database\Query\Builder $model */
-        $model = new CounselorAccount;
+        $model = new User;
         $model->setAttribute('credential', $data['credential']);
         $model->setAttribute('name', $data['name']);
         $model->setAttribute('gender', $data['gender']);
+        $model->setAttribute('role', $data['role']);
         $model->setAttribute('avatar', $model->generate($model->getAttribute('gender')));
         $model->setAttribute('password', bcrypt($data['password']));
 
-        //$model->save();
+        $model->save();
 
         return $model;
     }
