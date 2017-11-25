@@ -54,7 +54,7 @@ class CounselorRegistrar implements Registrar
         $model->setAttribute('avatar', $model->generate($model->getAttribute('gender')));
         $model->setAttribute('password', bcrypt($data['password']));
 
-        $model->save();
+        //$model->save();
 
         return $model;
     }
