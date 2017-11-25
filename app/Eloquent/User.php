@@ -70,6 +70,11 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\Eloquent\Coupon', 'assignee', 'id');
     }
 
+    public function counselor()
+    {
+        return $this->hasOne('App\Eloquent\UserCounselors', 'user', 'id');
+    }
+
     /**
      * @return string
      */
