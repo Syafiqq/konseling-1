@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use App\Eloquent\User;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,6 @@ class RedirectIfAuthenticated
      * Create a new filter instance.
      *
      * @param  Guard $auth
-     * @return void
      */
     public function __construct(Guard $auth)
     {
@@ -36,7 +36,10 @@ class RedirectIfAuthenticated
     {
         if ($this->auth->check())
         {
-            return new RedirectResponse(url('/home'));
+            /** @var User $user */
+            $user = $this->auth->user();
+
+            return new RedirectResponse(url("/{$user->getAttribute('role')}/dashboard"));
         }
 
         return $next($request);
