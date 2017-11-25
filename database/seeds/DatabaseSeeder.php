@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('CounselorAccountSeeder');
+        $this->call('UserCounselorsSeeder');
         $this->call('CouponSeeder');
     }
 

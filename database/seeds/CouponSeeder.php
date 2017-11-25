@@ -2,6 +2,7 @@
 
 use App\Eloquent\CounselorAccount;
 use App\Eloquent\Coupon;
+use App\Eloquent\User;
 use App\Generators\CouponGenerator;
 use Illuminate\Database\Seeder;
 
@@ -20,8 +21,8 @@ class CouponSeeder extends Seeder
     {
         $nip = '125150200111112';
         /** @var \Illuminate\Database\Query\Builder $model */
-        $model = new CounselorAccount;
-        /** @var CounselorAccount $admin */
+        $model = new User;
+        /** @var User $admin */
         if ($admin = $model->where('credential', '=', $nip)->first())
         {
             $count = 6;
