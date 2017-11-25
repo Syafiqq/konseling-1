@@ -21,7 +21,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
     $router->group(['prefix' => '/auth'], function () use ($router) {
         //@formatter:off
         $router->get(   '/register', ['uses' => 'Auth@registerCreate', 'as' => 'counselor.auth.register.create']);
-        $router->post(  '/register', ['uses' => 'Auth@registerStore' , 'as' => 'counselor.auth.register.store']);
+        $router->post(  '/register', ['middleware' => 'auth.role.counselor', 'uses' => 'Auth@registerStore' , 'as' => 'counselor.auth.register.store']);
         //@formatter:on
     });
 });
