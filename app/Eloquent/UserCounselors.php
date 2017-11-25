@@ -37,11 +37,6 @@ class UserCounselors extends Model
         return $this->getAttribute('id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo('App\Eloquent\User', 'user', 'id');
-    }
-
     /**
      * @return string
      */
