@@ -3,15 +3,40 @@
 use App\Eloquent\Coupon;
 use App\Http\Controllers\Controller;
 use App\Services\CounselorRegistrar;
+use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
 class Auth extends Controller
 {
-    public function login()
+    public function getLogin()
     {
+        return view("layout.counselor.auth.login.counselor_auth_login_$this->theme");
+    }
 
+    /**
+     * @param Guard $auth
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function postLogin(Guard $auth, Request $request)
+    {
+        $this->validate($request, [
+            'credential' => 'required|exists:users,credential|max:100',
+            'password' => 'required|min:8',
+        ]);
+
+        $credentials = $request->only(['credential', 'password']);
+
+        if ($auth->attempt($credentials, false))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
+        else
+        {
+            abort(404);
+        }
     }
 
     public function registerCreate()
