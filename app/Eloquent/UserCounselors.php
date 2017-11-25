@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Counselors extends Model
+class UserCounselors extends Model
 {
     /**
      * @var bool
@@ -11,7 +11,7 @@ class Counselors extends Model
     /**
      * @var string
      */
-    protected $table = 'counselor_accounts';
+    protected $table = 'user_counselors';
     /**
      * @var array
      */
