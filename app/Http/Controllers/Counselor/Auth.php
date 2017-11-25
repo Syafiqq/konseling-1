@@ -16,7 +16,6 @@ class Auth extends Controller
     public function __construct(Request $request)
     {
         parent::__construct();
-        $this->redirectPath = $request->getRequestUri();
     }
 
 
