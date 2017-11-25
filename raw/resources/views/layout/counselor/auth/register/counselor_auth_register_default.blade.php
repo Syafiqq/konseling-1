@@ -25,18 +25,18 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
 @endif
 {!! $form->open(['route' => 'counselor.auth.register.store', 'method' => 'post']) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('text','name', null, ['placeholder' => 'Nama', 'required'=> true]) !!}
+{!! $form->input('text','name', 'Counselor-1', ['placeholder' => 'Nama', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('text','credential', null, ['placeholder' => 'NIK/NIP', 'required'=> true]) !!}
+{!! $form->input('text','credential', '125150200111111', ['placeholder' => 'NIK/NIP', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->radio('gender', 'male', null, ['required' => true]); !!}Laki
+{!! $form->radio('gender', 'male', true, ['required' => true]); !!}Laki
 {!! $form->radio('gender', 'female', null, ['required' => true]); !!}Perempuan
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('password','password', null, ['placeholder' => 'Password', 'required'=> true]) !!}
+{!! $form->input('password','password', 'password', ['placeholder' => 'Password', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('password','password_confirmation', null, ['placeholder' => 'Ulangi Password', 'required'=> true]) !!}
+{!! $form->input('password','password_confirmation', 'password', ['placeholder' => 'Ulangi Password', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('text','token', null, ['placeholder' => 'Kode Registrasi', 'required'=> true]) !!}
+{!! $form->input('text','token', '7A4683B0F617', ['placeholder' => 'Kode Registrasi', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
 {!! $form->button('Submit', ['type' => 'Submit']) !!}
 {!! $form->close() !!}
