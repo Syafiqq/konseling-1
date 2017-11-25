@@ -1,11 +1,24 @@
 <?php namespace App\Http\Controllers\Counselor;
 
+use App\Eloquent\Coupon;
 use App\Http\Controllers\Controller;
 use App\Services\CounselorRegistrar;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class Auth extends Controller
 {
+
+    private $redirectPath;
+    private $redirectTo;
+
+    public function __construct(Request $request)
+    {
+        parent::__construct();
+        $this->redirectPath = $request->getRequestUri();
+    }
+
 
     public function login()
     {
@@ -21,6 +34,19 @@ class Auth extends Controller
     {
         $validator = $registrar->validator($request->all());
 
+        $validator->after(function (Validator $validator) use ($request) {
+            /** @var Builder $coupon */
+            $coupon = new Coupon();
+            if (is_null($coupon = $coupon->where('coupon', '=', $request->get('token', null))->first()))
+            {
+                $validator->errors()->add('coupon', 'Kode Registrasi Tidak Valid');
+            }
+            else
+            {
+                //$coupon->delete();
+            }
+        });
+
         if ($validator->fails())
         {
             $this->throwValidationException(
@@ -28,22 +54,19 @@ class Auth extends Controller
             );
         }
 
-        $user = $registrar->create($request->all());
-        Log::debug($user);
+        $registrar->create($request->all());
 
         return redirect($this->redirectPath());
     }
 
     public function redirectPath()
     {
-        Log::debug($this->redirectPath);
-        Log::debug($this->redirectTo);
         if (property_exists($this, 'redirectPath'))
         {
             return $this->redirectPath;
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/counselor';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/counselor/dashboard';
     }
 
 }
