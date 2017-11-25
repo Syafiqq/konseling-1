@@ -9,16 +9,6 @@ use Illuminate\Validation\Validator;
 
 class Auth extends Controller
 {
-
-    private $redirectPath;
-    private $redirectTo;
-
-    public function __construct(Request $request)
-    {
-        parent::__construct();
-    }
-
-
     public function login()
     {
 
