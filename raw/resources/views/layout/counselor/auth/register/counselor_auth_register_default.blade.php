@@ -11,14 +11,26 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
     <title>Document</title>
 </head>
 <body>
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong>
+        There were some problems with your input.
+        <br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 {!! $form->open(['route' => 'counselor.auth.register.store', 'method' => 'post']) !!}
 {!! nl2br(PHP_EOL) !!}
 {!! $form->input('text','name', null, ['placeholder' => 'Nama', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
 {!! $form->input('text','credential', null, ['placeholder' => 'NIK/NIP', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->radio('gender', 'l', null, ['required' => true]); !!}Laki
-{!! $form->radio('gender', 'p', null, ['required' => true]); !!}Perempuan
+{!! $form->radio('gender', 'male', null, ['required' => true]); !!}Laki
+{!! $form->radio('gender', 'female', null, ['required' => true]); !!}Perempuan
 {!! nl2br(PHP_EOL) !!}
 {!! $form->input('password','password', null, ['placeholder' => 'Password', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
