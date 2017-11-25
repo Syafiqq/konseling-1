@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
  * Class CreateCounselorAccount
  * @noinspection PhpUndefinedMethodInspection
  */
-class CreateCounselorAccountsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * @var Illuminate\Database\Schema\Builder
@@ -24,7 +24,7 @@ class CreateCounselorAccountsTable extends Migration
     public function __construct()
     {
         $this->schema    = \Illuminate\Support\Facades\Schema::getFacadeRoot();
-        $this->tableName = 'counselor_accounts';
+        $this->tableName = 'users';
     }
 
     /**
@@ -43,10 +43,8 @@ class CreateCounselorAccountsTable extends Migration
                 $table->string('credential', 100)->unique();
                 $table->string('name', 100);
                 $table->enum('gender', ['male', 'female']);
+                $table->enum('role', ['student', 'counselor']);
                 $table->string('avatar', 100)->nullable();
-                $table->string('school', 100)->nullable();
-                $table->string('school_head', 100)->nullable();
-                $table->string('school_head_credential', 100)->nullable();
                 $table->string('password', 60);
                 $table->rememberToken();
                 $table->timestamp('created_at')->default($db->raw('CURRENT_TIMESTAMP'));
@@ -69,5 +67,4 @@ class CreateCounselorAccountsTable extends Migration
     {
         $this->schema->dropIfExists($this->tableName);
     }
-
 }
