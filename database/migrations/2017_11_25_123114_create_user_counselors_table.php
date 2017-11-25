@@ -12,15 +12,14 @@ class CreateUserCounselorsTable extends Migration
     /**
      * @var string
      */
-    private $tableName;
+    static $tableName = 'user_counselors';
 
     /**
      * CreateCounselorAccount constructor.
      */
     public function __construct()
     {
-        $this->schema    = \Illuminate\Support\Facades\Schema::getFacadeRoot();
-        $this->tableName = 'user_counselors';
+        $this->schema = \Illuminate\Support\Facades\Schema::getFacadeRoot();
     }
 
     /**
@@ -30,18 +29,18 @@ class CreateUserCounselorsTable extends Migration
      */
     public function up()
     {
-        if (!$this->schema->hasTable($this->tableName))
+        if (!$this->schema->hasTable(self::$tableName))
         {
             /** @var Illuminate\Database\Connection $db */
             $db = \Illuminate\Support\Facades\DB::getFacadeRoot();
-            $this->schema->create($this->tableName, function (Blueprint $table) use ($db) {
+            $this->schema->create(self::$tableName, function (Blueprint $table) use ($db) {
                 $table->increments('id');
                 $table->integer('user')->unsigned();
                 $table->string('school', 100)->nullable();
                 $table->string('school_head', 100)->nullable();
                 $table->string('school_head_credential', 100)->nullable();
                 $table->foreign('user')
-                    ->references('id')->on('users')
+                    ->references('id')->on(CreateUsersTable::$tableName)
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             });
@@ -59,9 +58,9 @@ class CreateUserCounselorsTable extends Migration
      */
     public function down()
     {
-        if ($this->schema->hasTable($this->tableName))
+        if ($this->schema->hasTable(self::$tableName))
         {
-            $this->schema->table($this->tableName, function (Blueprint $table) {
+            $this->schema->table(self::$tableName, function (Blueprint $table) {
                 $table->dropForeign('user_counselors_user_foreign');
             });
         }
@@ -70,6 +69,6 @@ class CreateUserCounselorsTable extends Migration
             echo 'Table Not Exists';
         }
 
-        $this->schema->dropIfExists($this->tableName);
+        $this->schema->dropIfExists(self::$tableName);
     }
 }

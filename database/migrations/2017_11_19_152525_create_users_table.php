@@ -16,15 +16,14 @@ class CreateUsersTable extends Migration
     /**
      * @var string
      */
-    private $tableName;
+    static $tableName = 'users';
 
     /**
      * CreateCounselorAccount constructor.
      */
     public function __construct()
     {
-        $this->schema    = \Illuminate\Support\Facades\Schema::getFacadeRoot();
-        $this->tableName = 'users';
+        $this->schema = \Illuminate\Support\Facades\Schema::getFacadeRoot();
     }
 
     /**
@@ -34,11 +33,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (!$this->schema->hasTable($this->tableName))
+        if (!$this->schema->hasTable(self::$tableName))
         {
             /** @var Illuminate\Database\Connection $db */
             $db = \Illuminate\Support\Facades\DB::getFacadeRoot();
-            $this->schema->create($this->tableName, function (Blueprint $table) use ($db) {
+            $this->schema->create(self::$tableName, function (Blueprint $table) use ($db) {
                 $table->increments('id');
                 $table->string('credential', 100)->unique();
                 $table->string('name', 100);
@@ -65,6 +64,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists($this->tableName);
+        $this->schema->dropIfExists(self::$tableName);
     }
 }

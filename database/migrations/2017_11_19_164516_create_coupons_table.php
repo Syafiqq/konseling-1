@@ -16,7 +16,7 @@ class CreateCouponsTable extends Migration
     /**
      * @var string
      */
-    private $tableName;
+    static $tableName = 'coupons';
 
 
     /**
@@ -24,8 +24,7 @@ class CreateCouponsTable extends Migration
      */
     public function __construct()
     {
-        $this->schema    = \Illuminate\Support\Facades\Schema::getFacadeRoot();
-        $this->tableName = 'coupons';
+        $this->schema = \Illuminate\Support\Facades\Schema::getFacadeRoot();
     }
 
     /**
@@ -35,18 +34,18 @@ class CreateCouponsTable extends Migration
      */
     public function up()
     {
-        if (!$this->schema->hasTable($this->tableName))
+        if (!$this->schema->hasTable(self::$tableName))
         {
             /** @var Illuminate\Database\Connection $db */
             $db = \Illuminate\Support\Facades\DB::getFacadeRoot();
-            $this->schema->create($this->tableName, function (Blueprint $table) use ($db) {
+            $this->schema->create(self::$tableName, function (Blueprint $table) use ($db) {
                 $table->increments('id');
                 $table->string('coupon', 20)->unique();
                 $table->integer('assignee')->unsigned();
                 $table->timestamp('created_at')->default($db->raw('CURRENT_TIMESTAMP'));
 
                 $table->foreign('assignee')
-                    ->references('id')->on('counselor_accounts')
+                    ->references('id')->on(CreateUsersTable::$tableName)
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             });
@@ -64,9 +63,9 @@ class CreateCouponsTable extends Migration
      */
     public function down()
     {
-        if ($this->schema->hasTable($this->tableName))
+        if ($this->schema->hasTable(self::$tableName))
         {
-            $this->schema->table($this->tableName, function (Blueprint $table) {
+            $this->schema->table(self::$tableName, function (Blueprint $table) {
                 $table->dropForeign('coupons_assignee_foreign');
             });
         }
@@ -75,7 +74,7 @@ class CreateCouponsTable extends Migration
             echo 'Table Not Exists';
         }
 
-        $this->schema->dropIfExists($this->tableName);
+        $this->schema->dropIfExists(self::$tableName);
     }
 
 }
