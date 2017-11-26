@@ -56,7 +56,7 @@ trait AuthFlow
 
         /** @var Builder $coupon */
         $coupon = new Coupon();
-        //$coupon->where('coupon', '=', $request->get('token', null))->delete();
+        $coupon->where('coupon', '=', $request->get('token', null))->delete();
 
         $registrar->create($request->all());
 
