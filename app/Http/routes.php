@@ -27,3 +27,13 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         });
     });
 });
+$router->group(['namespace' => 'Student', 'prefix' => '/student'], function () use ($router) {
+    $router->group(['prefix' => '/auth'], function () use ($router) {
+        $router->group(['middleware' => 'guest'], function () use ($router) {
+            $router->get('/register', ['uses' => 'Auth@registerCreate', 'as' => 'student.auth.register.create']);
+            $router->post('/register', ['middleware' => 'auth.role.student', 'uses' => 'Auth@registerStore', 'as' => 'student.auth.register.store']);
+            $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'student.auth.login.get']);
+            $router->post('/login', ['middleware' => 'auth.role.student', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
+        });
+    });
+});
