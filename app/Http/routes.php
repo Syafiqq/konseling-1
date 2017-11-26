@@ -23,7 +23,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
             $router->get('/register', ['uses' => 'Auth@registerCreate', 'as' => 'counselor.auth.register.create']);
             $router->post('/register', ['middleware' => 'auth.role.counselor', 'uses' => 'Auth@registerStore', 'as' => 'counselor.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'counselor.auth.login.get']);
-            $router->post('/login', ['uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
+            $router->post('/login', ['middleware' => 'auth.role.counselor', 'uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
         });
     });
 });
