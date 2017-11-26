@@ -20,6 +20,6 @@ class Auth extends Controller
 
     public function redirectPath()
     {
-        $this->redirect('/student/dashboard');
+        return $this->redirect('/student/dashboard');
     }
 }
