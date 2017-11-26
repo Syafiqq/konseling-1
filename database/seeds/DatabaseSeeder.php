@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call('UserCounselorsSeeder');
+        $this->call('UserStudentsSeeder');
         $this->call('CouponSeeder');
     }
 
