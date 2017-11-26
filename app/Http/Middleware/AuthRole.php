@@ -1,10 +1,10 @@
 <?php namespace App\Http\Middleware;
 
+use App\Contracts\Roleable;
 use Closure;
 
-abstract class AuthRole
+abstract class AuthRole implements Roleable
 {
-
     /**
      * Handle an incoming request.
      *
@@ -18,6 +18,4 @@ abstract class AuthRole
 
         return $next($request);
     }
-
-    public abstract function getRole();
 }
