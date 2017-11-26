@@ -75,6 +75,11 @@ class User extends Model implements Authenticatable
         return $this->hasOne('App\Eloquent\UserCounselors', 'user', 'id');
     }
 
+    public function student()
+    {
+        return $this->hasOne('App\Eloquent\UserStudents', 'user', 'id');
+    }
+
     /**
      * @return string
      */
