@@ -28,9 +28,10 @@ trait AuthFlow
         $this->validate($request, [
             'credential' => 'required|exists:users,credential|max:100',
             'password' => 'required|min:8',
+            'role' => "required|in:{$this->getRole()}",
         ]);
 
-        $credentials = $request->only(['credential', 'password']);
+        $credentials = $request->only(['credential', 'password', 'role']);
 
         if ($auth->attempt($credentials, false))
         {
