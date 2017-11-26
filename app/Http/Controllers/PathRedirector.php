@@ -16,7 +16,7 @@ trait PathRedirector
      * @param string $path
      * @return mixed
      */
-    private function redirect($path)
+    public function redirect($path)
     {
         if (property_exists($this, 'redirectPath'))
         {
