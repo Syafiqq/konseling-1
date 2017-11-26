@@ -9,11 +9,12 @@
 
 namespace App\Services;
 
+use App\Contracts\Roleable;
 use App\Eloquent\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Support\Facades\Validator;
 
-class UserRegistrar implements Registrar
+abstract class UserRegistrar implements Registrar, Roleable
 {
     /**
      * Get a validator for an incoming registration request.
@@ -30,7 +31,7 @@ class UserRegistrar implements Registrar
             'credential' => 'required|max:100|unique:users',
             'name' => 'required|max:100',
             'gender' => 'required|in:male,female',
-            'role' => "required|in:counselor,student",
+            'role' => "required|in:{$this->getRole()}",
             'password' => 'required|confirmed|min:8',
             'token' => 'required|exists:coupons,coupon',
         ]);
@@ -53,7 +54,7 @@ class UserRegistrar implements Registrar
         $model->setAttribute('avatar', $model->generate($model->getAttribute('gender')));
         $model->setAttribute('password', bcrypt($data['password']));
 
-        //$model->save();
+        $model->save();
 
         return $model;
     }
