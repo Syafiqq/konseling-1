@@ -32,6 +32,7 @@ class UserRegistrar implements Registrar
             'gender' => 'required|in:male,female',
             'role' => "required|in:counselor,student",
             'password' => 'required|confirmed|min:8',
+            'token' => 'required|exists:coupons,coupon',
         ]);
     }
 
