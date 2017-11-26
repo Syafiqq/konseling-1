@@ -15,7 +15,6 @@ use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
 
 trait AuthFlow
 {
@@ -43,22 +42,9 @@ trait AuthFlow
         }
     }
 
-    public function registerStore(UserRegistrar $registrar, Request $request)
+    public function registerStore(UserRegistrar $registrar, Request $request, Guard $guard)
     {
         $validator = $registrar->validator($request->all());
-
-        $validator->after(function (Validator $validator) use ($request) {
-            /** @var Builder $coupon */
-            $coupon = new Coupon();
-            if (is_null($coupon = $coupon->where('coupon', '=', $request->get('token', null))->first()))
-            {
-                $validator->errors()->add('coupon', 'Kode Registrasi Tidak Valid');
-            }
-            else
-            {
-                //$coupon->delete();
-            }
-        });
 
         if ($validator->fails())
         {
@@ -67,9 +53,13 @@ trait AuthFlow
             );
         }
 
+        /** @var Builder $coupon */
+        $coupon = new Coupon();
+        //$coupon->where('coupon', '=', $request->get('token', null))->delete();
+
         $registrar->create($request->all());
 
-        return redirect($this->redirectPath());
+        return $this->postLogin($guard, $request);
     }
 }
 
