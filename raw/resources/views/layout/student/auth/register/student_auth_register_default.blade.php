@@ -23,11 +23,11 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
         </ul>
     </div>
 @endif
-{!! $form->open(['route' => 'counselor.auth.register.store', 'method' => 'post']) !!}
+{!! $form->open(['route' => 'student.auth.register.store', 'method' => 'post']) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('text','name', 'Counselor-1', ['placeholder' => 'Nama', 'required'=> true]) !!}
+{!! $form->input('text','name', 'Sudent-1', ['placeholder' => 'Nama', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
-{!! $form->input('text','credential', '125150200111111', ['placeholder' => 'NIK/NIP', 'required'=> true]) !!}
+{!! $form->input('text','credential', '10001', ['placeholder' => 'NISN', 'required'=> true]) !!}
 {!! nl2br(PHP_EOL) !!}
 {!! $form->radio('gender', 'male', true, ['required' => true]); !!}Laki
 {!! $form->radio('gender', 'female', null, ['required' => true]); !!}Perempuan
