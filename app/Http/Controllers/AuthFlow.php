@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
 
 
 use App\Eloquent\Coupon;
-use App\Services\CounselorRegistrar;
+use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -43,7 +43,7 @@ trait AuthFlow
         }
     }
 
-    public function registerStore(CounselorRegistrar $registrar, Request $request)
+    public function registerStore(UserRegistrar $registrar, Request $request)
     {
         $validator = $registrar->validator($request->all());
 
