@@ -1,20 +1,16 @@
 <?php namespace App\Http\Controllers\Student;
 
-use App\Contracts\RedirectResolver;
-use App\Contracts\Roleable;
 use App\Http\Controllers\AuthFlow;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PathRedirector;
-use App\Services\StudentRegistrar;
-use Illuminate\Auth\Guard;
-use Illuminate\Http\Request;
 
-class Auth extends Controller implements Roleable, RedirectResolver
+class Auth extends Controller
 {
-    use PathRedirector, AuthFlow
+    use AuthFlow
     {
         registerStore as private _registerStore;
     }
+
+    private $role = 'student';
 
     public function getLogin()
     {
@@ -26,22 +22,19 @@ class Auth extends Controller implements Roleable, RedirectResolver
         return view("layout.student.auth.register.student_auth_register_$this->theme");
     }
 
-    public function registerStore(StudentRegistrar $registrar, Request $request, Guard $guard)
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    public function defaultRedirectPath()
     {
-        return $this->_registerStore($registrar, $request, $guard);
-    }
-
-
-    public function redirectPath()
-    {
-        return $this->redirect('/student/dashboard');
+        return "/{$this->role}/dashboard";
     }
 
     /**
-     * @return string
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
-    public function getRole()
+    public function defaultLoginPath()
     {
-        return 'student';
+        return redirect()->route('student.auth.login.get', [$this->role]);
     }
 }

@@ -1,20 +1,16 @@
 <?php namespace App\Http\Controllers\Counselor;
 
-use App\Contracts\RedirectResolver;
-use App\Contracts\Roleable;
 use App\Http\Controllers\AuthFlow;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PathRedirector;
-use App\Services\CounselorRegistrar;
-use Illuminate\Auth\Guard;
-use Illuminate\Http\Request;
 
-class Auth extends Controller implements Roleable, RedirectResolver
+class Auth extends Controller
 {
-    use PathRedirector, AuthFlow
+    use AuthFlow
     {
         registerStore as private _registerStore;
     }
+
+    private $role = 'counselor';
 
     public function getLogin()
     {
@@ -26,18 +22,19 @@ class Auth extends Controller implements Roleable, RedirectResolver
         return view("layout.counselor.auth.register.counselor_auth_register_$this->theme");
     }
 
-    public function registerStore(CounselorRegistrar $registrar, Request $request, Guard $guard)
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    public function defaultRedirectPath()
     {
-        return $this->_registerStore($registrar, $request, $guard);
+        return "/{$this->role}/dashboard";
     }
 
-    public function redirectPath()
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    public function defaultLoginPath()
     {
-        return $this->redirect('/counselor/dashboard');
-    }
-
-    public function getRole()
-    {
-        return 'counselor';
+        return redirect()->route('counselor.auth.login.get', [$this->role]);
     }
 }
