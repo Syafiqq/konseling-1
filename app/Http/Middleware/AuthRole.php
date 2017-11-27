@@ -1,9 +1,8 @@
 <?php namespace App\Http\Middleware;
 
-use App\Contracts\Roleable;
 use Closure;
 
-abstract class AuthRole implements Roleable
+class AuthRole
 {
     /**
      * Handle an incoming request.
@@ -14,7 +13,12 @@ abstract class AuthRole implements Roleable
      */
     public function handle($request, Closure $next)
     {
-        $request->merge(['role' => $this->getRole()]);
+        $role = $request->route()->getParameter('role');
+        if (empty($role))
+        {
+            abort(404);
+        }
+        $request->merge(['role' => $role]);
 
         return $next($request);
     }
