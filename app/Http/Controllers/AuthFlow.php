@@ -21,30 +21,58 @@ trait AuthFlow
     /**
      * @param Guard $auth
      * @param Request $request
+     * @param string $role
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function postLogin(Guard $auth, Request $request)
+    public function postLogin(Guard $auth, Request $request, $role)
     {
         $this->validate($request, [
             'credential' => 'required|exists:users,credential|max:100',
             'password' => 'required|min:8',
-            'role' => "required|in:{$this->getRole()}",
+            'role' => "required|in:{$role}",
         ]);
 
         $credentials = $request->only(['credential', 'password', 'role']);
 
         if ($auth->attempt($credentials, false))
         {
-            return redirect()->intended($this->redirectPath());
+            return $this->validResponseOrDefault($this->redirectPath(), redirect()->intended($this->redirectPath()));
         }
         else
         {
-            abort(404);
+            return $this->validResponseOrDefault($this->loginPath(), redirect($this->loginPath()))
+                ->withInput($request->only(['credential', 'password']))
+                ->withErrors([
+                    'email' => $this->getFailedLoginMessage(),
+                ]);
         }
     }
 
-    public function registerStore(UserRegistrar $registrar, Request $request, Guard $guard)
+    /**
+     * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string $response
+     * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse $default
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function validResponseOrDefault($response, $default)
     {
+        return is_string($response) ? $default : $response;
+    }
+
+    public function getFailedLoginMessage()
+    {
+        return 'Akun Tidak Terdaftar';
+    }
+
+    /**
+     * @param UserRegistrar $registrar
+     * @param Request $request
+     * @param Guard $guard
+     * @param string $role
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function registerStore(UserRegistrar $registrar, Request $request, Guard $guard, $role)
+    {
+        $registrar->setRole($role);
         $validator = $registrar->validator($request->all());
 
         if ($validator->fails())
@@ -60,8 +88,39 @@ trait AuthFlow
 
         $registrar->create($request->all());
 
-        return $this->postLogin($guard, $request);
+        return $this->postLogin($guard, $request, $role);
     }
+
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    private function loginPath()
+    {
+        return property_exists($this, 'loginPath') ? $this->loginPath : $this->defaultLoginPath();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
+    public function redirectPath()
+    {
+        if (property_exists($this, 'redirectPath'))
+        {
+            return $this->redirectPath;
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : $this->defaultRedirectPath();
+    }
+
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    abstract public function defaultLoginPath();
+
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    abstract public function defaultRedirectPath();
 }
 
 ?>
