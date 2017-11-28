@@ -4,6 +4,7 @@ use Closure;
 
 class AuthRole
 {
+    use RoleSegmentManager;
     /**
      * Handle an incoming request.
      *
@@ -13,7 +14,7 @@ class AuthRole
      */
     public function handle($request, Closure $next)
     {
-        $role = $request->segment(1, null);
+        $role = $this->getRole($request);
         if (empty($role))
         {
             abort(404);
