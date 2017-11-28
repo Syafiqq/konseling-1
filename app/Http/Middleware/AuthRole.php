@@ -13,12 +13,13 @@ class AuthRole
      */
     public function handle($request, Closure $next)
     {
-        $role = $request->route()->getParameter('role');
+        $role = $request->segment(1, null);
         if (empty($role))
         {
             abort(404);
         }
         $request->merge(['role' => $role]);
+        $request->route()->setParameter('role', $role);
 
         return $next($request);
     }
