@@ -10,14 +10,13 @@ class CreateCouponsTable extends Migration
 {
 
     /**
-     * @var Illuminate\Database\Schema\Builder
-     */
-    private $schema;
-    /**
      * @var string
      */
     static $tableName = 'coupons';
-
+    /**
+     * @var Illuminate\Database\Schema\Builder
+     */
+    private $schema;
 
     /**
      * CreateCouponsTable constructor.

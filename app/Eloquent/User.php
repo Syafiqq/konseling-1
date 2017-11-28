@@ -81,14 +81,6 @@ class User extends Model implements Authenticatable
     }
 
     /**
-     * @return string
-     */
-    protected function getDateFormat()
-    {
-        return 'Y-m-d H:i:s';
-    }
-
-    /**
      * Get the unique identifier for the user.
      *
      * @return mixed
@@ -119,6 +111,16 @@ class User extends Model implements Authenticatable
     }
 
     /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
+
+    /**
      * Set the token value for the "remember me" session.
      *
      * @param  string $value
@@ -130,12 +132,10 @@ class User extends Model implements Authenticatable
     }
 
     /**
-     * Get the column name for the "remember me" token.
-     *
      * @return string
      */
-    public function getRememberTokenName()
+    protected function getDateFormat()
     {
-        return 'remember_token';
+        return 'Y-m-d H:i:s';
     }
 }

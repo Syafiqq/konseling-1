@@ -6,13 +6,13 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateUserCounselorsTable extends Migration
 {
     /**
-     * @var Illuminate\Database\Schema\Builder
-     */
-    private $schema;
-    /**
      * @var string
      */
     static $tableName = 'user_counselors';
+    /**
+     * @var Illuminate\Database\Schema\Builder
+     */
+    private $schema;
 
     /**
      * CreateCounselorAccount constructor.

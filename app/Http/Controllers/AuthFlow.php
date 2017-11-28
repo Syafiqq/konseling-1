@@ -19,6 +19,34 @@ use Illuminate\Http\Request;
 trait AuthFlow
 {
     /**
+     * @param UserRegistrar $registrar
+     * @param Request $request
+     * @param Guard $guard
+     * @param string $role
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function registerStore(UserRegistrar $registrar, Request $request, Guard $guard, $role)
+    {
+        $registrar->setRole($role);
+        $validator = $registrar->validator($request->all());
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        /** @var Builder $coupon */
+        $coupon = new Coupon();
+        $coupon->where('coupon', '=', $request->get('token', null))->delete();
+
+        $registrar->create($request->all());
+
+        return $this->postLogin($guard, $request, $role);
+    }
+
+    /**
      * @param Guard $auth
      * @param Request $request
      * @param string $role
@@ -58,47 +86,6 @@ trait AuthFlow
         return is_string($response) ? $default : $response;
     }
 
-    public function getFailedLoginMessage()
-    {
-        return 'Akun Tidak Terdaftar';
-    }
-
-    /**
-     * @param UserRegistrar $registrar
-     * @param Request $request
-     * @param Guard $guard
-     * @param string $role
-     * @return $this|\Illuminate\Http\RedirectResponse
-     */
-    public function registerStore(UserRegistrar $registrar, Request $request, Guard $guard, $role)
-    {
-        $registrar->setRole($role);
-        $validator = $registrar->validator($request->all());
-
-        if ($validator->fails())
-        {
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }
-
-        /** @var Builder $coupon */
-        $coupon = new Coupon();
-        $coupon->where('coupon', '=', $request->get('token', null))->delete();
-
-        $registrar->create($request->all());
-
-        return $this->postLogin($guard, $request, $role);
-    }
-
-    /**
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
-     */
-    private function loginPath()
-    {
-        return property_exists($this, 'loginPath') ? $this->loginPath : $this->defaultLoginPath();
-    }
-
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
@@ -110,6 +97,19 @@ trait AuthFlow
         }
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : $this->defaultRedirectPath();
+    }
+
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
+     */
+    private function loginPath()
+    {
+        return property_exists($this, 'loginPath') ? $this->loginPath : $this->defaultLoginPath();
+    }
+
+    public function getFailedLoginMessage()
+    {
+        return 'Akun Tidak Terdaftar';
     }
 
     /**
