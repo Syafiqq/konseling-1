@@ -147,6 +147,16 @@ gulp.task('watch-resources-views', function () {
     });
 });
 
+gulp.task('minify-and-watch', function (callback) {
+    runSequence('minify-public-js',
+        'minify-public-css',
+        'minify-resources-views',
+        'watch-public-js',
+        'watch-public-css',
+        'watch-resources-views',
+        callback);
+});
+
 gulp.task('cleaning-generated-file-light', function () {
     return del(gdel.delLight());
 });
