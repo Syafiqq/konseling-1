@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
         'debug' => 'App\Http\Middleware\Debug',
         'auth.role' => 'App\Http\Middleware\AuthRole',
+        'authenticated.source' => 'App\Http\Middleware\AuthenticatedSource',
     ];
 
 }
