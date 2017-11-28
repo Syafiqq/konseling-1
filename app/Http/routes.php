@@ -21,9 +21,9 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
     $router->group(['prefix' => '/auth'], function () use ($router) {
         $router->group(['middleware' => 'guest'], function () use ($router) {
             $router->get('/register', ['uses' => 'Auth@registerCreate', 'as' => 'counselor.auth.register.create']);
-            $router->post('/register', ['middleware' => 'auth.role.counselor', 'uses' => 'Auth@registerStore', 'as' => 'counselor.auth.register.store']);
+            $router->post('/register', ['middleware' => 'auth.role', 'uses' => 'Auth@registerStore', 'as' => 'counselor.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'counselor.auth.login.get']);
-            $router->post('/login', ['middleware' => 'auth.role.counselor', 'uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
+            $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
         });
     });
 });
@@ -31,9 +31,9 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
     $router->group(['prefix' => '/auth'], function () use ($router) {
         $router->group(['middleware' => 'guest'], function () use ($router) {
             $router->get('/register', ['uses' => 'Auth@registerCreate', 'as' => 'student.auth.register.create']);
-            $router->post('/register', ['middleware' => 'auth.role.student', 'uses' => 'Auth@registerStore', 'as' => 'student.auth.register.store']);
+            $router->post('/register', ['middleware' => 'auth.role', 'uses' => 'Auth@registerStore', 'as' => 'student.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'student.auth.login.get']);
-            $router->post('/login', ['middleware' => 'auth.role.student', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
+            $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
         });
     });
 });
