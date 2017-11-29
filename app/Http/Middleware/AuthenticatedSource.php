@@ -20,7 +20,7 @@ class AuthenticatedSource
         /** @noinspection PhpUndefinedMethodInspection */
         /** @var User $auth */
         $auth = Auth::user();
-        if (strcmp(($auth->getAttribute('role') ?: null), $this->getRole($request)) != 0)
+        if (strcmp((!$auth ?: $auth->getAttribute('role') ?: null), $this->getRole($request)) != 0)
         {
             abort(404);
         }
