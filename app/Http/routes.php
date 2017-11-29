@@ -28,6 +28,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
         $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'counselor.home.dashboard']);
+        $router->get('/coupon/generate', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator']);
     });
 });
 $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () use ($router) {
