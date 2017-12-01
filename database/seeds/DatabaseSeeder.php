@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call('UserStudentsSeeder');
         $this->call('CouponSeeder');
         $this->call('QuestionCategoriesSeeder');
+        $this->call('QuestionFavoursSeeder');
     }
 
 }
