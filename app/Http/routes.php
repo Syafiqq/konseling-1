@@ -42,5 +42,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
         $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'student.home.dashboard']);
+        $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'student.profile.edit']);
+        $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'student.profile.update']);
     });
 });
