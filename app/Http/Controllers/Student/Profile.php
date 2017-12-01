@@ -46,9 +46,6 @@ class Profile extends Controller
      */
     public function update(Request $request)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         $this->validate($request, [
             'school' => 'required',
             'grade' => 'required',
@@ -58,6 +55,6 @@ class Profile extends Controller
 
         $this->student->update($student);
 
-        return redirect()->back()->with('cbk_msg', 'Perubahan Berhasil');
+        return redirect()->back()->with('cbk_msg', ['notify' => 'Perubahan Berhasil']);
     }
 }

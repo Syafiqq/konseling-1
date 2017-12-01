@@ -8,6 +8,6 @@ class Home extends Controller
     public function index()
     {
         /** @noinspection PhpUndefinedMethodInspection */
-        dd(Session::get('cbk_msg', null));
+        var_dump(Session::get('cbk_msg', null));
     }
 }

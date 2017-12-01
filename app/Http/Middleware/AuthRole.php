@@ -5,6 +5,7 @@ use Closure;
 class AuthRole
 {
     use RoleSegmentManager;
+
     /**
      * Handle an incoming request.
      *

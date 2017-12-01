@@ -14,7 +14,7 @@ class Home extends Controller
     public function index()
     {
         /** @noinspection PhpUndefinedMethodInspection */
-        dd(Session::get('cbk_msg', ''));
+        var_dump(Session::get('cbk_msg', null));
     }
 
     public function couponGenerator()
@@ -22,19 +22,21 @@ class Home extends Controller
         /** @noinspection PhpUndefinedMethodInspection */
         /** @var User $user */
         $user = \Illuminate\Support\Facades\Auth::user();
+        $code = $this->generate();
         while (1)
         {
             try
             {
-                $coupon = new Coupon(['coupon' => $this->generate()]);
+                $coupon = new Coupon(['coupon' => $code]);
                 $user->coupon()->save($coupon);
                 break;
             }
             catch (QueryException $ignored)
             {
             }
+            $code = $this->generate();
         }
-        $redirect = redirect()->intended(route('counselor.home.dashboard'))->with('cbk_msg', 'Kupon Berhasil Ditambahkan');
+        $redirect = redirect()->intended(route('counselor.home.dashboard'))->with('cbk_msg', ['message' => "Kode : $code", 'notify' => 'Kode Berhasil Ditambahkan']);
 
         return $redirect;
     }

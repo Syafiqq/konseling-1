@@ -2,7 +2,6 @@
 
 class TemplateController extends Controller
 {
-
     public function boilerplate()
     {
         return view('template.boilerplate');
