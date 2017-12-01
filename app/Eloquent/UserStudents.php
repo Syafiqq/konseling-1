@@ -19,11 +19,11 @@ class UserStudents extends Model
     /**
      * @var array
      */
-    protected $guarded = ['id', 'user'];
+    protected $guarded = ['id', 'user', 'active'];
     /**
      * @var array
      */
-    protected $fillable = ['school'];
+    protected $fillable = ['school', 'grade'];
     /**
      * @var string
      */
