@@ -27,9 +27,11 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
-        $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'counselor.home.dashboard']);
-        $router->get('/coupon/generate', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator']);
         $router->get('/auth/logout', ['uses' => 'Auth@getLogout', 'as' => 'counselor.auth.logout']);
+        $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'counselor.home.dashboard']);
+        $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'counselor.profile.edit']);
+        $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'counselor.profile.update']);
+        $router->get('/coupon/generate', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator']);
     });
 });
 $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () use ($router) {
@@ -42,9 +44,9 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
+        $router->get('/auth/logout', ['uses' => 'Auth@getLogout', 'as' => 'student.auth.logout']);
         $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'student.home.dashboard']);
         $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'student.profile.edit']);
         $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'student.profile.update']);
-        $router->get('/auth/logout', ['uses' => 'Auth@getLogout', 'as' => 'student.auth.logout']);
     });
 });
