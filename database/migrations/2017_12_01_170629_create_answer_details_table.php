@@ -38,7 +38,7 @@ class CreateAnswerDetailsTable extends Migration
                 $table->increments('id');
                 $table->integer('answer_code')->unsigned();
                 $table->integer('question')->unsigned();
-                $table->integer('answer')->unsigned();
+                $table->integer('answer')->unsigned()->nullable();
                 $table->integer('favour')->unsigned();
                 $table->integer('scale')->unsigned();
                 $table->timestamp('answered_at')->nullable()->default(null);
