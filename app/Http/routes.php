@@ -40,4 +40,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
             $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
         });
     });
+    $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
+        $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'student.home.dashboard']);
+    });
 });
