@@ -11,10 +11,12 @@ namespace App\Http\Controllers;
 
 
 use App\Eloquent\Coupon;
+use App\Eloquent\User;
 use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 trait AuthFlow
 {
@@ -64,7 +66,7 @@ trait AuthFlow
 
         if ($auth->attempt($credentials, false))
         {
-            return $this->validResponseOrDefault($this->redirectPath(), redirect()->intended($this->redirectPath()));
+            return $this->validResponseOrDefault($this->redirectPath(), redirect()->intended($this->redirectPath()), ['message' => ['Successfully Login']]);
         }
         else
         {
@@ -79,11 +81,14 @@ trait AuthFlow
     /**
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string $response
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse $default
+     * @param null $callback
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function validResponseOrDefault($response, $default)
+    public function validResponseOrDefault($response, $default, $callback = null)
     {
-        return is_string($response) ? $default : $response;
+        $valid = is_string($response) ? $default : $response;
+
+        return $callback ? $valid->with('cbk_msg', $callback) : $valid;
     }
 
     /**
@@ -110,6 +115,16 @@ trait AuthFlow
     public function getFailedLoginMessage()
     {
         return 'Akun Tidak Terdaftar';
+    }
+
+    public function getLogout(Guard $guard)
+    {
+        /** @var User $user */
+        /** @noinspection PhpUndefinedMethodInspection */
+        $role = Auth::user()->getAttribute('role');
+        $guard->logout();
+
+        return redirect()->route("$role.auth.login.get")->with('cbk_msg', ['message' => 'Successfully Logout']);
     }
 
     /**
