@@ -23,7 +23,8 @@ class Profile extends Controller
         parent::__construct();
         /** @var User $user */
         /** @noinspection PhpUndefinedMethodInspection */
-        $this->student = \Illuminate\Support\Facades\Auth::user()->getAttribute('student');
+        $user          = \Illuminate\Support\Facades\Auth::user();
+        $this->student = $user ? $user->getAttribute('student') : null;
     }
 
     /**
@@ -55,6 +56,6 @@ class Profile extends Controller
 
         $this->student->update($student);
 
-        return redirect()->back()->with('cbk_msg', ['notify' => 'Perubahan Berhasil']);
+        return redirect()->back()->with('cbk_msg', ['notify' => ['Perubahan Berhasil']]);
     }
 }

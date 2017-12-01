@@ -66,7 +66,7 @@ trait AuthFlow
 
         if ($auth->attempt($credentials, false))
         {
-            return $this->validResponseOrDefault($this->redirectPath(), redirect()->intended($this->redirectPath()), ['message' => ['Successfully Login']]);
+            return $this->validResponseOrDefault($this->redirectPath(), redirect()->intended($this->redirectPath()), ['notify' => ['Successfully Login']]);
         }
         else
         {
@@ -124,7 +124,7 @@ trait AuthFlow
         $role = Auth::user()->getAttribute('role');
         $guard->logout();
 
-        return redirect()->route("$role.auth.login.get")->with('cbk_msg', ['message' => 'Successfully Logout']);
+        return redirect()->route("$role.auth.login.get")->with('cbk_msg', ['notify' => ['Successfully Logout']]);
     }
 
     /**

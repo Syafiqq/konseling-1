@@ -36,7 +36,7 @@ class Home extends Controller
             }
             $code = $this->generate();
         }
-        $redirect = redirect()->intended(route('counselor.home.dashboard'))->with('cbk_msg', ['message' => "Kode : $code", 'notify' => 'Kode Berhasil Ditambahkan']);
+        $redirect = redirect()->intended(route('counselor.home.dashboard'))->with('cbk_msg', ['message' => ["Kode : $code"], 'notify' => ['Kode Berhasil Ditambahkan']]);
 
         return $redirect;
     }
