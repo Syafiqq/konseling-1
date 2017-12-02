@@ -39,8 +39,8 @@ class CreateAnswerDetailsTable extends Migration
                 $table->integer('answer_code')->unsigned();
                 $table->integer('question')->unsigned();
                 $table->integer('answer')->unsigned()->nullable();
-                $table->integer('favour')->unsigned();
-                $table->integer('scale')->unsigned();
+                $table->integer('favour')->unsigned()->nullable();
+                $table->integer('scale')->unsigned()->nullable();
                 $table->timestamp('answered_at')->nullable()->default(null);
                 $table->timestamp('updated_at')->nullable()->default(null);
                 $table->foreign('answer_code')
