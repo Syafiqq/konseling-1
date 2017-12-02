@@ -46,4 +46,8 @@ class AnswerDetail extends Model
         return 'Y-m-d H:i:s';
     }
 
+    public function question()
+    {
+        return $this->belongsTo('App\Eloquent\Question', 'question', 'id');
+    }
 }
