@@ -21,23 +21,26 @@ class UserStudentsSeeder extends Seeder
      */
     public function run()
     {
-        $nisn = '10000';
-        /** @var \Illuminate\Database\Query\Builder $user */
-        $user = new User();
-        if (!$user->where('credential', '=', $nisn)->first())
+        $data = [
+            ['credential' => '10000', 'name' => 'Student-1', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 0]],
+            ['credential' => '10001', 'name' => 'Student-2', 'gender' => 'female', 'role' => 'student', 'avatar' => $this->generate('female'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]],
+            ['credential' => '10002', 'name' => 'Student-3', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 0]],
+        ];
+
+        /** @var \Illuminate\Database\Query\Builder $model */
+        $model = new User();
+        foreach ($data as $category)
         {
-            $user->setAttribute('credential', $nisn);
-            $user->setAttribute('name', 'Student');
-            $user->setAttribute('gender', 'male');
-            $user->setAttribute('role', 'student');
-            $user->setAttribute('avatar', $this->generate($user->getAttribute('gender')));
-            $user->setAttribute('password', bcrypt('12345678'));
-            $user->save();
-
-            $counselor = new UserStudents();
-            $counselor->setAttribute('school', 'UM');
-
-            $user->student()->save($counselor);
+            if (!$model->where('credential', '=', $category['credential'])->first())
+            {
+                /** @var UserStudents $student */
+                $student = new UserStudents();
+                $student->setRawAttributes($category['student']);
+                unset($category['student']);
+                $model = new User($category);
+                $model->save();
+                $model->student()->save($student);
+            }
         }
     }
 }
