@@ -80,6 +80,11 @@ class User extends Model implements Authenticatable
         return $this->hasOne('App\Eloquent\UserStudents', 'user', 'id');
     }
 
+    public function answer()
+    {
+        return $this->hasMany('App\Eloquent\Answer', 'user', 'id');
+    }
+
     /**
      * Get the unique identifier for the user.
      *
