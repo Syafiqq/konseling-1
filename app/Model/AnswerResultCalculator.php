@@ -34,7 +34,14 @@ trait AnswerResultCalculator
             {
                 $result += is_null($answer_detail->getAttribute('answer')) ? 0 : (intval($answer_detail->getAttribute('favour')) === 1 ? doubleval($answer_detail->getAttribute('answer')) : (doubleval($answer_detail->getAttribute('scale')) - doubleval($answer_detail->getAttribute('answer')) + 1));
             }
-            $result *= 100.0 / (doubleval($answer_scope->getAttribute('count')) * doubleval($answer_scope->getAttribute('max')));
+            try
+            {
+                $result *= 100.0 / (doubleval($answer_scope->getAttribute('count')) * doubleval($answer_scope->getAttribute('max')));
+            }
+            catch (\ErrorException $e)
+            {
+                $result = 0;
+            }
             $answer_result->setAttribute('result', $result);
             $answer_result->save();
         }
