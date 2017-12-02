@@ -38,6 +38,11 @@ class Answer extends Model
         return $this->getAttribute('id');
     }
 
+    public function answer_result()
+    {
+        return $this->hasMany('App\Eloquent\AnswerResult', 'answer_code', 'id');
+    }
+
     /**
      * @return string
      */
