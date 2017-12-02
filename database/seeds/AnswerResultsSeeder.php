@@ -1,6 +1,8 @@
 <?php
 
+use App\Eloquent\Answer;
 use App\Eloquent\AnswerResult;
+use App\Model\AnswerResultCalculator;
 use Illuminate\Database\Seeder;
 
 /**
@@ -12,6 +14,11 @@ use Illuminate\Database\Seeder;
  */
 class AnswerResultsSeeder extends Seeder
 {
+    use AnswerResultCalculator
+    {
+        calculate as private _calculate;
+    }
+
     public function run()
     {
         $data = [
@@ -47,6 +54,23 @@ class AnswerResultsSeeder extends Seeder
                 {
                     $model->insert($c2);
                 }
+            }
+        }
+
+        $this->calculate();
+    }
+
+    private function calculate()
+    {
+        $data = [1, 2, 3, 4];
+
+        foreach ($data as $answer_code)
+        {
+            /** @var Answer $answer */
+            $answer = Answer::find($answer_code);
+            if (!is_null($answer))
+            {
+                $this->_calculate($answer);
             }
         }
     }
