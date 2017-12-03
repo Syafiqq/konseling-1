@@ -33,7 +33,7 @@ if (!isset($user))
 @if($user->hasOpenedCourse())
     {!! link_to_route('counselor.student.publish', $title = 'Lanjutkan Sebelumnya', $parameters = [], $attributes = []);  !!}
 @else
-    {!! link_to_route('counselor.student.publish', $title = 'Mulai Baru', $parameters = [], $attributes = []);  !!}
+    {!! link_to_route('student.course.create', $title = 'Mulai Baru', $parameters = [], $attributes = []);  !!}
 @endif
 </body>
 </html>
