@@ -34,6 +34,7 @@ class Kernel extends HttpKernel
         'valid.student' => 'App\Http\Middleware\ValidStudent',
         'valid.student.report.detail' => 'App\Http\Middleware\ValidStudentReportDetail',
         'valid.student.report.publish' => 'App\Http\Middleware\ValidStudentReportPublish',
+        'valid.counselor.profile' => 'App\Http\Middleware\CounselorProfileCompletion',
     ];
 
 }
