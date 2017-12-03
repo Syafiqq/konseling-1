@@ -35,6 +35,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         $router->get('/report', ['uses' => 'Report@index', 'as' => 'counselor.report.list']);
         $router->patch('/report/student/{id}/activate', ['middleware' => 'valid.student', 'uses' => 'Report@activation', 'as' => 'counselor.student.activation'])->where('id', '[0-9]+');
         $router->get('/report/student/{id}/detail', ['middleware' => ['valid.student', 'valid.student.report.detail'], 'uses' => 'Report@detail', 'as' => 'counselor.student.detail'])->where('id', '[0-9]+');
+        $router->get('/report/student/{id}/{answer}/publish', ['middleware' => ['valid.student', 'valid.student.report.publish'], 'uses' => 'Report@publish', 'as' => 'counselor.student.publish'])->where(['id' => '[0-9]+', 'answer' => '[0-9]+']);
     });
 });
 $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () use ($router) {
