@@ -20,11 +20,11 @@ class ValidStudentReportDetail
         $user = User::where('id', '=', $id)->first();
         if (is_null($user))
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["User Tidak Dikenali"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['User Tidak Dikenali']]);
         }
         else if (!$user->isDetailReportValid())
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["User Belum Memiliki Data"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['User Belum Memiliki Data']]);
         }
         else
         {

@@ -23,15 +23,15 @@ class ValidStudentReportPublish
         }])->where('id', '=', $id)->first();
         if (is_null($user))
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["User Tidak Dikenali"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['User Tidak Dikenali']]);
         }
         else if (count($user->getAttribute('answer')) <= 0)
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["Data Tidak Ditemukan"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Data Tidak Ditemukan']]);
         }
         else if (is_null($user->getAttribute('answer')->first()->getAttribute('finished_at')))
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["Data Belum Diselesaikan"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Data Belum Diselesaikan']]);
         }
         else
         {

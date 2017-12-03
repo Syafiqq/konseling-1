@@ -22,7 +22,7 @@ abstract class ProfileCompletion
         }
         else
         {
-            return redirect()->back()->with('cbk_msg', ['notify' => ["Profil Anda Belum Lengkap"]]);
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Profil Anda Belum Lengkap']]);
         }
     }
 
