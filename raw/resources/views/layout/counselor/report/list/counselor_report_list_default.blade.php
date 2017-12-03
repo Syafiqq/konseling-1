@@ -76,7 +76,7 @@ $now = \Carbon\Carbon::now();
                 <td>Memiliki Izin</td>
             @elseif($answer->getAttribute('finished_at')->diffInDays($now) <= \App\Eloquent\Answer::$exerciseWindow)
                 <td>
-                    {!! $form->open(['route' => ['counselor.home.dashboard'], 'method' => 'patch']) !!}
+                    {!! $form->open(['route' => ['counselor.student.activation', $user->getKey()], 'method' => 'patch']) !!}
                     {!! $form->button('Aktifkan', ['type' => 'Submit']) !!}
                     {!! $form->close() !!}
                 </td>
