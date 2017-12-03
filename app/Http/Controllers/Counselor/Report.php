@@ -40,4 +40,15 @@ class Report extends Controller
 
         return view("layout.counselor.report.detail.counselor_report_detail_$this->theme", compact('categories', 'report'));
     }
+
+    public function publish($id, $answer)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        var_dump(Session::get('cbk_msg', null));
+
+        $user = User::with(['answer' => function ($query) use ($answer) {
+            $query->with('answer_result')->where('id', '=', $answer);
+        }])->where('id', '=', $id)->first();
+        dd($user);
+    }
 }
