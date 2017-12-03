@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-
+    public static $exerciseWindow = 7;
     /**
      * @var bool
      */
@@ -16,11 +16,11 @@ class Answer extends Model
     /**
      * @var array
      */
-    protected $dates = [];
+    protected $dates = ['finished_at'];
     /**
      * @var array
      */
-    protected $guarded = ['id', 'user', 'started_at', 'answered_at'];
+    protected $guarded = ['id', 'user', 'started_at', 'finished_at'];
     /**
      * @var array
      */
