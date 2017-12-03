@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'authenticated.source' => 'App\Http\Middleware\AuthenticatedSource',
         'valid.student' => 'App\Http\Middleware\ValidStudent',
         'valid.student.report.detail' => 'App\Http\Middleware\ValidStudentReportDetail',
+        'valid.student.report.publish' => 'App\Http\Middleware\ValidStudentReportPublish',
     ];
 
 }
