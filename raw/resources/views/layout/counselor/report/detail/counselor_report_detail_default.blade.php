@@ -74,7 +74,7 @@ $student = $report->getAttribute('student');
                 ?>
                 <td>{{ $isInProcess ? '-' : (is_null($result) ? '-' : sprintf("%.4g", doubleval($result->getAttribute('result')))) }}</td>
             @endforeach
-            <td>{!! $isInProcess ? '-' : link_to_route('counselor.student.detail', $title = 'Cetak', $parameters = [$report->getKey()], $attributes = []); !!}</td>
+            <td>{!! $isInProcess ? '-' : link_to_route('counselor.student.publish', $title = 'Cetak', $parameters = [$report->getKey(), $answer->getKey()], $attributes = []); !!}</td>
         </tr>
     @endforeach
     </tbody>
