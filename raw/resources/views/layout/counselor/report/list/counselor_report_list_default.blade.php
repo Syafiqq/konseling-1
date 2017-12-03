@@ -84,8 +84,8 @@ $now = \Carbon\Carbon::now();
                 <td>Memiliki Izin</td>
             @endif
 
-            @if(((count($user->getAttribute('answer')) === 1) && (!is_null($answer->getAttribute('finished_at')))) ^ (count($user->getAttribute('answer')) > 1))
-                <td>{!! link_to_route('counselor.home.dashboard', $title = 'Detail', $parameters = array(), $attributes = array()); !!}</td>
+            @if($user->isDetailReportValid())
+                <td>{!! link_to_route('counselor.student.detail', $title = 'Detail', $parameters = [$user->getKey()], $attributes = []); !!}</td>
             @else
                 <td>Belum Ada Data</td>
             @endif
