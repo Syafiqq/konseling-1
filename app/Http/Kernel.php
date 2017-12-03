@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
         'auth.role' => 'App\Http\Middleware\AuthRole',
         'authenticated.source' => 'App\Http\Middleware\AuthenticatedSource',
         'valid.student' => 'App\Http\Middleware\ValidStudent',
+        'valid.student.report.detail' => 'App\Http\Middleware\ValidStudentReportDetail',
     ];
 
 }
