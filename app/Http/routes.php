@@ -33,7 +33,8 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'counselor.profile.update']);
         $router->get('/coupon/generate', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator']);
         $router->get('/report', ['uses' => 'Report@index', 'as' => 'counselor.report.list']);
-        $router->patch('/report/student/{id}/activate', ['middleware' => 'valid.student', 'uses' => 'Report@activation', 'as' => 'counselor.student.activation']);
+        $router->patch('/report/student/{id}/activate', ['middleware' => 'valid.student', 'uses' => 'Report@activation', 'as' => 'counselor.student.activation'])->where('id', '[0-9]+');
+        $router->get('/report/student/{id}/detail', ['middleware' => ['valid.student', 'valid.student.report.detail'], 'uses' => 'Report@detail', 'as' => 'counselor.student.detail'])->where('id', '[0-9]+');
     });
 });
 $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () use ($router) {
