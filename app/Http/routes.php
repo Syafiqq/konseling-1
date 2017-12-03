@@ -56,5 +56,9 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
         $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'student.home.dashboard']);
         $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'student.profile.edit']);
         $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'student.profile.update']);
+        $router->group(['middleware' => 'valid.student.profile'], function () use ($router) {
+            $router->get('/course', ['uses' => 'Course@index', 'as' => 'student.course.start']);
+            $router->get('/course/create', ['middleware' => 'course.open.unavailable', 'uses' => 'Course@create', 'as' => 'student.course.create']);
+        });
     });
 });
