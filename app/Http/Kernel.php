@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
         'debug' => 'App\Http\Middleware\Debug',
         'auth.role' => 'App\Http\Middleware\AuthRole',
         'authenticated.source' => 'App\Http\Middleware\AuthenticatedSource',
+        'valid.student' => 'App\Http\Middleware\ValidStudent',
     ];
 
 }
