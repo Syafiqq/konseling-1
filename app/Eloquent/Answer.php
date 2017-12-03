@@ -43,6 +43,11 @@ class Answer extends Model
         return $this->hasMany('App\Eloquent\AnswerResult', 'answer_code', 'id');
     }
 
+    public function answer_detail()
+    {
+        return $this->hasMany('App\Eloquent\AnswerDetail', 'answer_code', 'id');
+    }
+
     /**
      * @return string
      */
