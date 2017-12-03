@@ -16,7 +16,7 @@ class Answer extends Model
     /**
      * @var array
      */
-    protected $dates = ['finished_at'];
+    protected $dates = ['started_at', 'finished_at'];
     /**
      * @var array
      */
