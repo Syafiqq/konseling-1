@@ -94,6 +94,25 @@ class User extends Model implements Authenticatable
         return ((count($this->getAttribute('answer')) === 1) && (!is_null($this->getAttribute('answer')->last()->getAttribute('finished_at')))) || (count($this->getAttribute('answer')) > 1);
     }
 
+    public function hasOpenedCourse()
+    {
+        /** @var Answer $answer */
+        $answer = $this->getAttribute('answer')->last();
+
+        if (is_null($answer))
+        {
+            return false;
+        }
+        else if (is_null($answer->getAttribute('finished_at')))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     /**
      * Get the unique identifier for the user.
      *
