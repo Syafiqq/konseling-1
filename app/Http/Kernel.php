@@ -37,6 +37,8 @@ class Kernel extends HttpKernel
         'valid.counselor.profile' => 'App\Http\Middleware\CounselorProfileCompletion',
         'valid.student.profile' => 'App\Http\Middleware\StudentProfileCompletion',
         'course.open.unavailable' => 'App\Http\Middleware\NoOpenedCourse',
+        'course.open.available' => 'App\Http\Middleware\AvailableOpenedCourse',
+        'valid.question' => 'App\Http\Middleware\ValidOpenedCourseQuestion',
     ];
 
 }
