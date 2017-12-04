@@ -8,7 +8,6 @@ use App\Eloquent\QuestionOption;
 use App\Eloquent\User;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -57,12 +56,17 @@ class Course extends Controller
 
     /**
      * @param int $question
-     * @param Collection $answers
+     * @param AnswerDetail $answer
+     * @return \Illuminate\View\View
      */
-    public function start($question, Collection $answers)
+    public function start($question, AnswerDetail $answer)
     {
         $question = intval($question);
-        $prev     = $current = $next = null;
+        $answers  = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last()->answer_detail()->skip($question - 2)->take(3)->get();
+        $current  = $answer;
+        $prev     = null;
+        $next     = null;
+
         /** @var Answer $answer */
         foreach ($answers as $answer)
         {
@@ -70,10 +74,6 @@ class Course extends Controller
             if ($answer_question === ($question - 1))
             {
                 $prev = $answer;
-            }
-            else if ($answer_question === ($question))
-            {
-                $current = $answer;
             }
             else if ($answer_question === ($question + 1))
             {
@@ -84,7 +84,8 @@ class Course extends Controller
 
         $question = Question::where('id', '=', $question)->first();
         $options  = QuestionOption::all();
+        $summary  = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last()->answer_detail()->get(['id', 'question', 'answer']);
 
-        dd([$prev, $current, $next, $question, $options]);
+        return view("layout.student.course.start.student_course_start_$this->theme", compact('prev', 'current', 'next', 'question', 'options', 'summary'));
     }
 }
