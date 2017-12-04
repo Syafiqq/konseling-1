@@ -20,8 +20,8 @@ class ValidOpenedCourseQuestion
 
         /** @var User $user */
         $user   = Auth::user();
-        $answer = $user->getAttribute('answer')->last()->answer_detail()->skip($question - 2)->take(3)->get();
-        if (count($answer) <= 1)
+        $answer = $user->getAttribute('answer')->last()->answer_detail()->skip($question - 1)->take(1)->first();
+        if (is_null($answer))
         {
             abort(404);
         }
