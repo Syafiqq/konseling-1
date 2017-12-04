@@ -51,7 +51,7 @@ class Course extends Controller
             }
         });
 
-        return redirect(route('student.course.start', [1]))->with('cbk_msg', ['notify' => ['Selamat Mengerjakan']]);
+        return redirect(route('student.course.start.edit', [1]))->with('cbk_msg', ['notify' => ['Selamat Mengerjakan']]);
     }
 
     /**
@@ -59,7 +59,7 @@ class Course extends Controller
      * @param AnswerDetail $answer
      * @return \Illuminate\View\View
      */
-    public function start($question, AnswerDetail $answer)
+    public function startEdit($question, AnswerDetail $answer)
     {
         $question = intval($question);
         $answers  = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last()->answer_detail()->skip($question - 2)->take(3)->get();

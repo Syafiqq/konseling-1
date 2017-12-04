@@ -25,7 +25,7 @@ $isFinished = $summary->filter(function ($answer_detail) {
 </head>
 <body>
 @foreach($summary as $answer_detail)
-    {!! link_to_route('student.course.start', $answer_detail->getAttribute('question'), [$answer_detail->getAttribute('question')]); !!}
+    {!! link_to_route('student.course.start.edit', $answer_detail->getAttribute('question'), [$answer_detail->getAttribute('question')]); !!}
 @endforeach
 @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -51,13 +51,13 @@ $isFinished = $summary->filter(function ($answer_detail) {
 @if(is_null($prev))
     << Sebelumnya
 @else
-    {!! link_to_route('student.course.start', '<< Sebelumnya', [$prev->getAttribute('question')]); !!}
+    {!! link_to_route('student.course.start.edit', '<< Sebelumnya', [$prev->getAttribute('question')]); !!}
 @endif
 
 @if(is_null($next))
     Selanjutnya >>
 @else
-    {!! link_to_route('student.course.start', 'Selanjutnya >>', [$next->getAttribute('question')]); !!}
+    {!! link_to_route('student.course.start.edit', 'Selanjutnya >>', [$next->getAttribute('question')]); !!}
 @endif
 
 @if($isFinished === 0)

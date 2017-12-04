@@ -31,7 +31,7 @@ if (!isset($user))
     </div>
 @endif
 @if($user->hasOpenedCourse())
-    {!! link_to_route('student.course.start', $title = 'Lanjutkan Sebelumnya', $parameters = [1], $attributes = []);  !!}
+    {!! link_to_route('student.course.start.edit', $title = 'Lanjutkan Sebelumnya', $parameters = [1], $attributes = []);  !!}
 @else
     {!! link_to_route('student.course.create', $title = 'Mulai Baru', $parameters = [], $attributes = []);  !!}
 @endif
