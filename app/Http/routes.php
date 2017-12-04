@@ -35,9 +35,9 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         $router->group(['prefix' => '/report', 'middleware' => 'valid.counselor.profile'], function () use ($router) {
             $router->get('', ['uses' => 'Report@index', 'as' => 'counselor.report.list']);
             $router->group(['prefix' => '/student', 'middleware' => ['valid.student']], function () use ($router) {
-                $router->patch('/{id}/activate', ['uses' => 'Report@activation', 'as' => 'counselor.student.activation'])->where('id', '[0-9]+');
-                $router->get('/{id}/detail', ['middleware' => 'valid.student.report.detail', 'uses' => 'Report@detail', 'as' => 'counselor.student.detail'])->where('id', '[0-9]+');
-                $router->get('/{id}/{answer}/publish', ['middleware' => 'valid.student.report.publish', 'uses' => 'Report@publish', 'as' => 'counselor.student.publish'])->where(['id' => '[0-9]+', 'answer' => '[0-9]+']);
+                $router->patch('/{id}/activate', ['uses' => 'Report@activation', 'as' => 'counselor.student.activation'])->where('id', '^[1-9][0-9]*');
+                $router->get('/{id}/detail', ['middleware' => 'valid.student.report.detail', 'uses' => 'Report@detail', 'as' => 'counselor.student.detail'])->where('id', '^[1-9][0-9]*');
+                $router->get('/{id}/{answer}/publish', ['middleware' => 'valid.student.report.publish', 'uses' => 'Report@publish', 'as' => 'counselor.student.publish'])->where(['id' => '^[1-9][0-9]*', 'answer' => '^[1-9][0-9]*']);
             });
         });
     });
@@ -59,6 +59,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
         $router->group(['middleware' => 'valid.student.profile'], function () use ($router) {
             $router->get('/course', ['uses' => 'Course@index', 'as' => 'student.course.start']);
             $router->get('/course/create', ['middleware' => 'course.open.unavailable', 'uses' => 'Course@create', 'as' => 'student.course.create']);
+            $router->get('/course/start/{question}', ['middleware' => ['course.open.available', 'valid.question'], 'uses' => 'Course@start', 'as' => 'student.course.start'])->where('question', '^[1-9][0-9]*');
         });
     });
 });
