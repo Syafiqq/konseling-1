@@ -16,7 +16,7 @@ class AnswerDetail extends Model
     /**
      * @var array
      */
-    protected $dates = [];
+    protected $dates = ['answered_at', 'updated_at'];
     /**
      * @var array
      */
