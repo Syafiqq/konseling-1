@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
         'course.open.available' => 'App\Http\Middleware\AvailableOpenedCourse',
         'valid.question' => 'App\Http\Middleware\ValidOpenedCourseQuestion',
         'valid.answer' => 'App\Http\Middleware\ValidAnswer',
+        'course.open.finished' => 'App\Http\Middleware\FinishedOpenedQuestion',
     ];
 
 }
