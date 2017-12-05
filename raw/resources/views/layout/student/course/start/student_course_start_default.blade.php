@@ -61,7 +61,7 @@ $isFinished = $summary->filter(function ($answer_detail) {
 @endif
 
 @if($isFinished === 0)
-    {!! $form->model($current, ['route' => ['counselor.profile.update'], 'method' => 'post']) !!}
+    {!! $form->open(['route' => ['student.course.finish'], 'method' => 'post']) !!}
     {!! $form->button('Selesai', ['type' => 'submit']) !!}
     {!! $form->close() !!}
 @endif
