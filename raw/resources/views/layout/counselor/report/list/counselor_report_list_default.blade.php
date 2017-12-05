@@ -51,7 +51,7 @@ $now = \Carbon\Carbon::now();
         /** @noinspection PhpUndefinedVariableInspection */
         $student = $user->getAttribute('student');
         /** @var \App\Eloquent\Answer $answer */
-        $answer = $user->getAttribute('answer')->first();
+        $answer = $user->getAttribute('answer')->last();
         ?>
         <tr>
             <td>{{$k + 1}}</td>
