@@ -39,14 +39,14 @@ $isFinished = $summary->filter(function ($answer_detail) {
         </ul>
     </div>
 @endif
-{!! $form->model($current, ['route' => ['counselor.profile.update'], 'method' => 'patch']) !!}
+{!! $form->model($current, ['route' => ['student.course.start.update', $current->getAttribute('question')], 'method' => 'patch']) !!}
 <h5>{{$question->getAttribute('question')}}</h5>
 @foreach($options as $option)
     {!! $form->radio('answer', $option->getAttribute('id'))!!}
     {{$option->getAttribute('description')}}
     {!! nl2br(PHP_EOL) !!}
 @endforeach
-{!! $form->button('Submit', ['type' => 'Simpan']) !!}
+{!! $form->button('Simpan', ['type' => 'submit']) !!}
 {!! $form->close() !!}
 @if(is_null($prev))
     << Sebelumnya
@@ -62,7 +62,7 @@ $isFinished = $summary->filter(function ($answer_detail) {
 
 @if($isFinished === 0)
     {!! $form->model($current, ['route' => ['counselor.profile.update'], 'method' => 'post']) !!}
-    {!! $form->button('Submit', ['type' => 'Selesai']) !!}
+    {!! $form->button('Selesai', ['type' => 'submit']) !!}
     {!! $form->close() !!}
 @endif
 </body>
