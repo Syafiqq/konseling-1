@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
         'course.open.unavailable' => 'App\Http\Middleware\NoOpenedCourse',
         'course.open.available' => 'App\Http\Middleware\AvailableOpenedCourse',
         'valid.question' => 'App\Http\Middleware\ValidOpenedCourseQuestion',
+        'valid.answer' => 'App\Http\Middleware\ValidAnswer',
     ];
 
 }
