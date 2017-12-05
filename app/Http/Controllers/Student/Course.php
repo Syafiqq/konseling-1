@@ -6,7 +6,9 @@ use App\Eloquent\AnswerResult;
 use App\Eloquent\Question;
 use App\Eloquent\QuestionOption;
 use App\Eloquent\User;
+use App\Eloquent\UserStudents;
 use App\Http\Controllers\Controller;
+use App\Model\AnswerResultCalculator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 
 class Course extends Controller
 {
+    use AnswerResultCalculator;
 
     public function index()
     {
@@ -111,5 +114,23 @@ class Course extends Controller
         $answer->save();
 
         return redirect()->back()->with('cbk_msg', ['notify' => ['Jawaban Berhasil Disimpan']]);
+    }
+
+    public function submit()
+    {
+        /**
+         * @var Answer $answer
+         * @var UserStudents $student
+         */
+        $answer  = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last();
+        $student = \Illuminate\Support\Facades\Auth::user()->getAttribute('student')->first();
+        $this->calculate($answer);
+        $answer->setAttribute('finished_at', Carbon::now());
+        $student->setAttribute('active', false);
+
+        $student->save();
+        $answer->save();
+
+        return redirect(route('student.home.dashboard'))->with('cbk_msg', ['notify' => ['Terima Kasih']]);
     }
 }
