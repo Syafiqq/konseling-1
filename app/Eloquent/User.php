@@ -90,8 +90,7 @@ class User extends Model implements Authenticatable
      */
     public function isDetailReportValid()
     {
-        //Fuck it, Change to better guard than this
-        return ((count($this->getAttribute('answer')) === 1) && (!is_null($this->getAttribute('answer')->last()->getAttribute('finished_at')))) || (count($this->getAttribute('answer')) > 1);
+        return $this->answer()->whereNotNull('finished_at')->count() > 0;
     }
 
     public function hasOpenedCourse()
