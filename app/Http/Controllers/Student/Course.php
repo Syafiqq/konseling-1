@@ -4,6 +4,7 @@ use App\Eloquent\Answer;
 use App\Eloquent\AnswerDetail;
 use App\Eloquent\AnswerResult;
 use App\Eloquent\Question;
+use App\Eloquent\QuestionCategory;
 use App\Eloquent\QuestionOption;
 use App\Eloquent\User;
 use App\Eloquent\UserStudents;
@@ -132,5 +133,16 @@ class Course extends Controller
         $answer->save();
 
         return redirect(route('student.home.dashboard'))->with('cbk_msg', ['notify' => ['Terima Kasih']]);
+    }
+
+    public function result()
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        var_dump(Session::get('cbk_msg', null));
+
+        $categories = QuestionCategory::all();
+        $report     = \Illuminate\Support\Facades\Auth::user();
+
+        return view("layout.student.course.result.student_course_result_$this->theme", compact('categories', 'report'));
     }
 }
