@@ -7,6 +7,12 @@ if (!isset($user))
 {
     $user = null;
 }
+/** @var \App\Eloquent\UserStudents $student */
+/** @noinspection PhpUndefinedVariableInspection */
+$student = $user->getAttribute('student');
+/** @var \App\Eloquent\Answer $answer */
+$answer = $user->getAttribute('answer')->last();
+$now    = \Carbon\Carbon::now();
 
 ?>
         <!doctype html>
@@ -32,8 +38,10 @@ if (!isset($user))
 @endif
 @if($user->hasOpenedCourse())
     {!! link_to_route('student.course.start.edit', $title = 'Lanjutkan Sebelumnya', $parameters = [1], $attributes = []);  !!}
-@else
+@elseif((intval($student->getAttribute('active')) === 1) || is_null($answer) ||($answer->getAttribute('finished_at')->diffInDays($now) > \App\Eloquent\Answer::$exerciseWindow))
     {!! link_to_route('student.course.create', $title = 'Mulai Baru', $parameters = [], $attributes = []);  !!}
+@else
+    Anda Tidak Diperkenankan Mengerjakan, Silahkan Hubungi Konselor Anda.
 @endif
 </body>
 </html>
