@@ -63,6 +63,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
             $router->patch('/course/start/{question}', ['middleware' => ['course.open.available', 'valid.question', 'valid.answer'], 'uses' => 'Course@startUpdate', 'as' => 'student.course.start.update'])->where('question', '^[1-9][0-9]*');
             $router->post('/course/submit', ['middleware' => ['course.open.available', 'course.open.finished'], 'uses' => 'Course@submit', 'as' => 'student.course.finish']);
             $router->get('/course/result', ['middleware' => 'valid.self.report.detail', 'uses' => 'Course@result', 'as' => 'student.course.result']);
+            $router->get('/course/{answer}/detail', ['middleware' => 'valid.self.report.publish', 'uses' => 'Course@detail', 'as' => 'student.course.detail'])->where('answer', '^[1-9][0-9]*');
         });
     });
 });
