@@ -15,6 +15,12 @@ class Home extends Controller
     {
         /** @noinspection PhpUndefinedMethodInspection */
         var_dump(Session::get('cbk_msg', null));
+
+        $coupons = Coupon::with(['users' => function ($query) {
+            $query->get(['id', 'name']);
+        }])->get();
+
+        return view(" layout.counselor.dashboard.index.counselor_dashboard_index_$this->theme", compact('coupons'));
     }
 
     public function couponGenerator()
