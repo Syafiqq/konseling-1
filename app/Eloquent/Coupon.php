@@ -24,7 +24,7 @@ class Coupon extends Model
     /**
      * @var array
      */
-    protected $dates = [];
+    protected $dates = ['created_at'];
     /**
      * @var array
      */
@@ -44,6 +44,14 @@ class Coupon extends Model
     public function getRouteKey()
     {
         return $this->getAttribute('id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function users()
+    {
+        return $this->belongsTo('\App\Eloquent\User', 'assignee', 'id');
     }
 
     /**
