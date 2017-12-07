@@ -145,4 +145,14 @@ class Course extends Controller
 
         return view("layout.student.course.result.student_course_result_$this->theme", compact('categories', 'report'));
     }
+
+    public function detail($answer)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        var_dump(Session::get('cbk_msg', null));
+
+        /** @var Answer $answer */
+        $answer = \Illuminate\Support\Facades\Auth::user()->answer()->where('id', '=', $answer)->first();
+        dd($answer);
+    }
 }
