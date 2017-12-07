@@ -68,7 +68,7 @@ if (!isset($categories))
                 ?>
                 <td>{{ $isInProcess ? '-' : (is_null($result) ? '-' : sprintf("%.4g", doubleval($result->getAttribute('result')))) }}</td>
             @endforeach
-            <td>{!! $isInProcess ? '-' : link_to_route('counselor.student.publish', $title = 'Detail', $parameters = [$report->getKey(), $answer->getKey()], $attributes = []); !!}</td>
+            <td>{!! $isInProcess ? '-' : link_to_route('student.course.detail', $title = 'Detail', $parameters = [$answer->getKey()], $attributes = []); !!}</td>
         </tr>
     @endforeach
     </tbody>
