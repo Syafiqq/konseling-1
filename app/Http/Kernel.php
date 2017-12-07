@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
         'valid.student.report.detail' => 'App\Http\Middleware\ValidStudentReportDetail',
         'valid.student.report.publish' => 'App\Http\Middleware\ValidStudentReportPublish',
         'valid.self.report.detail' => 'App\Http\Middleware\ValidSelfReportDetail',
+        'valid.self.report.publish' => 'App\Http\Middleware\ValidSelfReportPublish',
         'valid.counselor.profile' => 'App\Http\Middleware\CounselorProfileCompletion',
         'valid.student.profile' => 'App\Http\Middleware\StudentProfileCompletion',
         'course.open.unavailable' => 'App\Http\Middleware\NoOpenedCourse',
