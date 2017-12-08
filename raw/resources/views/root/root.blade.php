@@ -6,7 +6,11 @@
     <meta name="description" content="Root">
 @endsection
 
-<!doctype html>
+@section('body-property')
+    <body>
+    @endsection
+
+    <!doctype html>
 <html class="no-js" lang="id-ID">
 <head>
     <meta charset="utf-8">
@@ -20,7 +24,7 @@
     @yield('head-js-pre')
     @yield('head-js-post')
 </head>
-<body>
+    @yield('body-property')
 @yield('body-css-upper-pre')
 @yield('body-css-upper-post')
 @yield('body-js-upper-pre')
