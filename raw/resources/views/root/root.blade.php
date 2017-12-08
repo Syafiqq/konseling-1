@@ -6,24 +6,6 @@
     <meta name="description" content="Root">
 @endsection
 
-@section('head-property')
-    {{-- Tell the browser to be responsive to screen width --}}
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    {{-- Favicon--}}
-    <link rel="apple-touch-icon" href="{{asset('/icon.png')}}">
-@endsection
-
-@section('body-upgrade-browser')
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an
-        <strong>outdated</strong>
-                              browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a>
-                              to improve your experience and security.
-    </p>
-    <![endif]-->
-@endsection
-
 <!doctype html>
 <html class="no-js" lang="id-ID">
 <head>
