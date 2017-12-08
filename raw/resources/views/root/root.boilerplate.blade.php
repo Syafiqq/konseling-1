@@ -1,5 +1,10 @@
 @extends('root.root')
 
+@section('head-property')
+    <link rel="manifest" href="{{asset('/manifest.min.json')}}">
+    @parent
+@endsection
+
 @section('head-css-pre')
     {{-- Normalize --}}
     <link rel="stylesheet" href="{{asset('/assets/vendor/html5-boilerplate/dist/css/normalize.min.css')}}">
