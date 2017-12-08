@@ -14,7 +14,8 @@ module.exports = {
             (negated ? '!' : '') + './node_modules/fastclick/lib/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/admin-lte/dist/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/html5shiv/dist/**' + (mime === null ? '' : '/' + mime),
-            (negated ? '!' : '') + './node_modules/respond.js/dest/**' + (mime === null ? '' : '/' + mime)
+            (negated ? '!' : '') + './node_modules/respond.js/dest/**' + (mime === null ? '' : '/' + mime),
+            (negated ? '!' : '') + './node_modules/bootstrap-notify/**' + (mime === null ? '' : '/' + mime)
         ];
     }
 };
