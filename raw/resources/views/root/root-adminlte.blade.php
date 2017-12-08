@@ -7,7 +7,7 @@
     {{-- Ionicons --}}
     <link rel="stylesheet" href="{{asset('/assets/vendor/ionicons/dist/css/ionicons.min.css')}}">
     {{-- NProgress --}}
-    <link rel="stylesheet" href="{{asset('/assets/vendor/nprogress/nprogress.min.js')}}">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/nprogress/nprogress.min.css')}}">
     {{-- Adminlte --}}
     <link rel="stylesheet" href="{{asset('/assets/vendor/admin-lte/dist/css/AdminLTE.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/admin-lte/dist/css/skins/skin-green.min.css')}}">
