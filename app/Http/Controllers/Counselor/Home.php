@@ -5,17 +5,15 @@ use App\Eloquent\User;
 use App\Generators\CouponGenerator;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Session;
 
 class Home extends Controller
 {
     use CouponGenerator;
 
+    //var_dump(Session::get('cbk_msg', null));
+
     public function index()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         $coupons = Coupon::with(['users' => function ($query) {
             $query->get(['id', 'name']);
         }])->get();
