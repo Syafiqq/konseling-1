@@ -13,7 +13,6 @@ use App\Model\AnswerResultCalculator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class Course extends Controller
 {
@@ -141,11 +140,11 @@ class Course extends Controller
 
     public function detail($answer)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
+        /** @var Answer $student */
+        $student = User::with(['answer' => function ($query) use ($answer) {
+            $query->with('answer_result')->where('id', '=', $answer);
+        }])->where('id', '=', \Illuminate\Support\Facades\Auth::user()->getKey())->first();
 
-        /** @var Answer $answer */
-        $answer = \Illuminate\Support\Facades\Auth::user()->answer()->where('id', '=', $answer)->first();
-        dd($answer);
+        return view("layout.student.course.detail.student_course_detail_$this->theme", compact('student'));
     }
 }
