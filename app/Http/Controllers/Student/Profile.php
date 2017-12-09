@@ -5,7 +5,6 @@ use App\Eloquent\UserStudents;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
 class Profile extends Controller
 {
@@ -33,9 +32,6 @@ class Profile extends Controller
      */
     public function edit()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         return view("layout.student.profile.edit.student_profile_edit_$this->theme", ['student' => $this->student]);
     }
 
