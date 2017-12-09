@@ -21,8 +21,6 @@ class Course extends Controller
 
     public function index()
     {
-        var_dump(Session::get('cbk_msg', null));
-
         /** @var User $user */
         $user = \Illuminate\Support\Facades\Auth::user();
 
@@ -132,7 +130,7 @@ class Course extends Controller
         $student->save();
         $answer->save();
 
-        return redirect(route('student.home.dashboard'))->with('cbk_msg', ['notify' => ['Terima Kasih']]);
+        return redirect(route('student.course.index'))->with('cbk_msg', ['notify' => ['Terima Kasih']]);
     }
 
     public function result()
