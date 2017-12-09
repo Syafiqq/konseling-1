@@ -4,7 +4,6 @@ use App\Eloquent\QuestionCategory;
 use App\Eloquent\User;
 use App\Eloquent\UserStudents;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
 class Report extends Controller
 {
@@ -37,12 +36,11 @@ class Report extends Controller
 
     public function publish($id, $answer)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
-        $user = User::with(['answer' => function ($query) use ($answer) {
+        $user    = \Illuminate\Support\Facades\Auth::user();
+        $student = User::with(['answer' => function ($query) use ($answer) {
             $query->with('answer_result')->where('id', '=', $answer);
         }])->where('id', '=', $id)->first();
-        dd($user);
+
+        return view("layout.counselor.report.publish.counselor_report_publish_$this->theme", compact('student', 'user'));
     }
 }
