@@ -24,13 +24,6 @@ $user = \Illuminate\Support\Facades\Auth::user();
                 </a>
             </li>
             <li>
-                <a href="{{route('counselor.coupon.generator')}}">
-                    <i class="fa fa-ticket"></i>
-                    <span>Generate Kupon</span>
-                    <span class="pull-right-container"></span>
-                </a>
-            </li>
-            <li>
                 <a href="{{route('counselor.profile.edit')}}">
                     <i class="fa fa-cog"></i>
                     <span>Profile</span>
