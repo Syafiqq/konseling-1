@@ -7,7 +7,7 @@ $counselorProfile = $user->counselor()->first();
 $studentProfile = $student->student()->first();
 $studentAnswer = $student->getAttribute('answer')->first();
 $accumulation = $studentAnswer->answer_result()->sum('result');
-$analytics = $studentAnswer->getResultAnalytics($accumulation);
+$analytics = $studentAnswer->getResultAnalytics();
 $now = \Carbon\Carbon::now();
 ?>
 @section('head-title')
@@ -77,12 +77,11 @@ $now = \Carbon\Carbon::now();
                     </div>
                     <div class="row vertical-align">
                         <div class="col-sm-12 text-center">
-                            <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">LAPORAN HASIL INVENTORI</p>
-                            <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">
-                                <b>
-                                    <i>SCHOOL ENGAGEMENT</i>
-                                </b>
-                                SISWA
+                            <p id="content_welcome" class="margin-bottom-4" style="margin-top: 12px;font-weight: bold; font-size: 16px">LAPORAN INVENTORI
+                                <i>ACADEMIC PLANNING SKILLS</i>
+                            </p>
+                            <p id="content_title" style="font-weight: bolder; font-size: 16px; margin: 4px">
+                                (KETERAMPILAN PERENCANAAN AKADEMIK) SISWA SMA
                             </p>
                         </div>
                     </div>
@@ -95,59 +94,69 @@ $now = \Carbon\Carbon::now();
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p class="margin-left-1-cm">Nama</p>
+                            <p class="font-size-12px margin-left-1-cm">Nama</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$student->getAttribute('name')}}</p>
+                            <p class="font-size-12px">: {{$student->getAttribute('name')}}</p>
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p>Sekolah</p>
+                            <p class="font-size-12px">Sekolah</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$studentProfile->getAttribute('school')}}</p>
+                            <p class="font-size-12px">: {{$studentProfile->getAttribute('school')}}</p>
                         </div>
                     </div>
                     <div class="row vertical-align">
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p class="margin-left-1-cm">NIS</p>
+                            <p class="font-size-12px margin-left-1-cm">NIS</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$student->getAttribute('credential')}}</p>
+                            <p class="font-size-12px">: {{$student->getAttribute('credential')}}</p>
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p>Jenis Kelamin</p>
+                            <p class="font-size-12px">Jenis Kelamin</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$student->getGenderTranslation()}}</p>
+                            <p class="font-size-12px">: {{$student->getGenderTranslation()}}</p>
                         </div>
                     </div>
                     <div class="row vertical-align">
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p class="margin-left-1-cm">Kelas</p>
+                            <p class="font-size-12px margin-left-1-cm">Kelas</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$studentProfile->getAttribute('grade')}}</p>
+                            <p class="font-size-12px">: {{$studentProfile->getAttribute('grade')}}</p>
                         </div>
                         <div class="col-sm-2 text-left">
-                            <p>Tanggal Pengisian</p>
+                            <p class="font-size-12px">Pengisian</p>
                         </div>
                         <div class="col-sm-3 no-padding-side">
-                            <p>: {{$studentAnswer->getAttribute('finished_at')->formatLocalized('%d %B %Y')}}</p>
+                            <p class="font-size-12px">: {{$studentAnswer->getAttribute('finished_at')->formatLocalized('%d %B %Y')}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-1">
                         </div>
                         <div class="col-sm-10 text-center">
-                            <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
-                            <b><?php printf("%.4g%%", $accumulation) ?></b>
+                            <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 8px">HASIL ANALISA</p>
+                            <p class="font-size-12px" style="text-align: justify">Berdasarkan pengisian inventori “
+                                <i>Academic Planning Skills</i>
+                                                                                  ” (Keterampilan Perencanaan Akademik)”
+                                <b>{{$student->getAttribute('name')}}</b>
+                                                                                  memiliki keterampilan perencanaan akademik sebesar
+                                <b>{{sprintf("%.4g%%", $accumulation)}}</b>
+                                                                                  dan termasuk dalam klasifikasi
+                                <b>{{array_values(array_filter($analytics, function($analytic) use ($accumulation){
+                                    return (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])));
+                                }))[0]['class']}}</b>
+                            </p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 8px">
                         <div class="col-sm-1"></div>
                         <div class="col-sm-10">
                             <table class="color-transparent custom-table">
@@ -165,26 +174,36 @@ $now = \Carbon\Carbon::now();
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="font-size-12px text-center">
-                                        <strong>{{$analytics['interval']}}</strong>
-                                    </td>
-                                    <td class="font-size-12px text-center">
-                                        <strong>{{$analytics['class']}}</strong>
-                                    </td>
-                                    <td class="font-size-12px text-center">
-                                        <strong>{{$analytics['description']['key']}}</strong>
-                                        <ol>
-                                            @foreach($analytics['description']['value'] as $interpretation)
-                                                <li class="text-left">
-                                                    <strong>{{$interpretation}}</strong>
-                                                </li>
-                                            @endforeach
-                                        </ol>
-                                    </td>
-                                </tr>
+                                @foreach($analytics as $analytic)
+                                    <?php
+                                    $pre_strong = $post_strong = '';
+                                    if (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])))
+                                    {
+                                        $pre_strong  = '<strong>';
+                                        $post_strong = '</strong>';
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td class="font-size-12px text-center">
+                                            {!! $pre_strong.$analytic['interval'].$post_strong!!}
+                                        </td>
+                                        <td class="font-size-12px text-center">
+                                            {!! $pre_strong.$analytic['class'].$post_strong!!}
+                                        </td>
+                                        <td class="font-size-12px text-left">
+                                            {!! $pre_strong.$analytic['description']['key'].$post_strong!!}
+                                            <br>
+                                            {!! $pre_strong.$analytic['description']['value'].$post_strong!!}
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
+                            <p class="text-left font-size-12px" style="margin-top: 12px">
+                                {!! sprintf(array_values(array_filter($analytics, function($analytic) use ($accumulation){
+                                    return (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])));
+                                }))[0]['recommendation'],$student->getAttribute('name'))!!}
+                            </p>
                         </div>
                     </div>
 
@@ -197,46 +216,46 @@ $now = \Carbon\Carbon::now();
                         </div>
                     </div>
                     <div class="row" style="margin-top: .5cm">
-                        <div class="col-sm-7 ">
+                        <div class="col-sm-8 ">
                         </div>
-                        <div class="col-sm-5 no-padding-side">
-                            <p class="margin-bottom-2">Malang, {{$now->formatLocalized('%d %B %Y')}}</p>
+                        <div class="col-sm-4 no-padding-side">
+                            <p class="font-size-12px margin-bottom-2">Malang, {{$now->formatLocalized('%d %B %Y')}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-4 no-padding-side">
-                            <p class="margin-bottom-2">Kepala Sekolah {{$counselorProfile->getAttribute('school')}}</p>
+                            <p class="font-size-12px margin-bottom-2">Kepala Sekolah {{$counselorProfile->getAttribute('school')}}</p>
                         </div>
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-3 ">
                         </div>
-                        <div class="col-sm-5 no-padding-side">
-                            <p class="margin-bottom-2">Konselor</p>
+                        <div class="col-sm-4 no-padding-side">
+                            <p class="font-size-12px margin-bottom-2">Konselor</p>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 1.2cm">
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-4 no-padding-side">
-                            <p class="margin-bottom-2">{{$counselorProfile->getAttribute('school_head')}}</p>
+                            <p class="font-size-12px margin-bottom-2">{{$counselorProfile->getAttribute('school_head')}}</p>
                         </div>
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-3 ">
                         </div>
-                        <div class="col-sm-5 no-padding-side">
-                            <p class="margin-bottom-2">{{$user->getAttribute('name')}}</p>
+                        <div class="col-sm-4 no-padding-side">
+                            <p class="font-size-12px margin-bottom-2">{{$user->getAttribute('name')}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-1 ">
                         </div>
                         <div class="col-sm-4 no-padding-side">
-                            <p class="margin-bottom-2">{{$counselorProfile->getAttribute('school_head_credential')}}</p>
+                            <p class="font-size-12px margin-bottom-2">{{$counselorProfile->getAttribute('school_head_credential')}}</p>
                         </div>
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-3 ">
                         </div>
-                        <div class="col-sm-5 no-padding-side">
-                            <p class="margin-bottom-2">{{$user->getAttribute('credential')}}</p>
+                        <div class="col-sm-4 no-padding-side">
+                            <p class="font-size-12px margin-bottom-2">{{$user->getAttribute('credential')}}</p>
                         </div>
                     </div>
                 </div>

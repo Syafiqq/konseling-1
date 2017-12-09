@@ -48,34 +48,25 @@ class Answer extends Model
         return $this->hasMany('App\Eloquent\AnswerDetail', 'answer_code', 'id');
     }
 
-    public function getResultAnalytics($accumulation)
+    public function getResultAnalytics()
     {
-        $accumulation = doubleval($accumulation);
-        $analytics    = [];
-        if (($accumulation >= 0.0) && ($accumulation <= 33.3))
-        {
-            $analytics['interval']    = '0 - 33%';
-            $analytics['class']       = 'Rendah';
-            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Rendah']];
-        }
-        else if (($accumulation > 33.3) && ($accumulation <= 66.6))
-        {
-            $analytics['interval']    = '34 - 66%';
-            $analytics['class']       = 'Sedang';
-            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Sedang']];
-        }
-        else if (($accumulation > 66.6) && ($accumulation <= 100.0))
-        {
-            $analytics['interval']    = '67 - 100%';
-            $analytics['class']       = 'Tinggi';
-            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Tinggi']];
-        }
-        else
-        {
-            $analytics['interval']    = '-';
-            $analytics['class']       = '-';
-            $analytics['description'] = ['key' => '-', 'value' => ['-']];
-        }
+        $analytics = [];
+
+        $analytics['rendah']['guard']          = ['min' => -0.1, 'max' => 33.3];
+        $analytics['rendah']['interval']       = '0 - 33%';
+        $analytics['rendah']['class']          = 'Rendah';
+        $analytics['rendah']['recommendation'] = 'Keterampilan perencanaan akademik <strong>%s</strong> masih kurang, perlu diperbaiki dan ditingkatkan dengan melakukan tindakan yang mendukung.';
+        $analytics['rendah']['description']    = ['key' => 'Ini Adalah Key : ', 'value' => 'Deskripsi Rendah'];
+        $analytics['sedang']['guard']          = ['min' => 33.3, 'max' => 66.6];
+        $analytics['sedang']['interval']       = '34 - 66%';
+        $analytics['sedang']['class']          = 'Sedang';
+        $analytics['sedang']['recommendation'] = 'Keterampilan perencanaan akademik <strong>%s</strong> sudah cukup, perlu ditingkatkan dengan melakukan tindakan yang mendukung.';
+        $analytics['sedang']['description']    = ['key' => 'Ini Adalah Key : ', 'value' => 'Deskripsi Sedang'];
+        $analytics['tinggi']['guard']          = ['min' => 66.6, 'max' => 100.0];
+        $analytics['tinggi']['interval']       = '67 - 100%';
+        $analytics['tinggi']['class']          = 'Tinggi';
+        $analytics['tinggi']['recommendation'] = 'Keterampilan perencanaan akademik <strong>%s</strong> sudah tinggi, perlu dipertahankan dan ditingkatkan dengan melakukan tindakan yang mendukung.';
+        $analytics['tinggi']['description']    = ['key' => 'Ini Adalah Key : ', 'value' => 'Deskripsi Tinggi'];
 
         return $analytics;
     }
