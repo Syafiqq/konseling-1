@@ -27,9 +27,6 @@ class Report extends Controller
 
     public function detail($id)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         $categories = QuestionCategory::all();
         $report     = User::with(['student', 'answer' => function ($query) {
             $query->with('answer_result');
