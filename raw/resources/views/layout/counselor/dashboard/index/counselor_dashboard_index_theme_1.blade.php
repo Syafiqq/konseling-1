@@ -38,6 +38,7 @@
                             <th>No</th>
                             <th>Kupon</th>
                             <th>Pembuat</th>
+                            <th>Peruntukan</th>
                             <th>Tanggal</th>
                         </tr>
                         </thead>
@@ -52,6 +53,7 @@
                                 <td>{{$k + 1}}</td>
                                 <td>{{$coupon->getAttribute('coupon')}}</td>
                                 <td>{{$user->getAttribute('name')}}</td>
+                                <td>{{$coupon->getHumanReadableUsage()}}</td>
                                 <td>{{$coupon->getAttribute('created_at')->formatLocalized('%d %B %Y %H:%M')}}</td>
                             </tr>
                         @endforeach
