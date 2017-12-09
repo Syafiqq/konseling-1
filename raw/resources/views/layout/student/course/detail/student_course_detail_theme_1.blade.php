@@ -6,7 +6,7 @@
 $studentProfile = $student->student()->first();
 $studentAnswer = $student->getAttribute('answer')->first();
 $accumulation = $studentAnswer->answer_result()->sum('result');
-$analytics = $studentAnswer->getResultAnalytics($accumulation);
+$analytics = $studentAnswer->getResultAnalytics();
 $now = \Carbon\Carbon::now();
 ?>
 @section('head-title')
@@ -27,11 +27,13 @@ $now = \Carbon\Carbon::now();
                 &nbsp;
             </h1>
             <ol class="breadcrumb">
-                <li class="active">
-                    <i class="fa fa-home"></i>
-                    Hasil
-                </li>
                 <li>
+                    <a href="{{route('student.course.result')}}">
+                        <i class="fa fa-home"></i>
+                        Hasil
+                    </a>
+                </li>
+                <li class="active">
                     <i class="fa fa-home"></i>
                     Detail
                 </li>
@@ -50,13 +52,16 @@ $now = \Carbon\Carbon::now();
                         <div class="col-sm-12">
                             <div class="row vertical-align">
                                 <div class="col-sm-12 text-center">
-                                    <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">HASIL INVENTORI</p>
-                                    <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">
-                                        <b>
-                                            <i>SCHOOL ENGAGEMENT</i>
-                                        </b>
-                                        SISWA
-                                    </p>
+                                    <div class="row vertical-align">
+                                        <div class="col-sm-12 text-center">
+                                            <p id="content_welcome" class="margin-bottom-4" style="margin-top: 12px;font-weight: bold; font-size: 16px">LAPORAN INVENTORI
+                                                <i>ACADEMIC PLANNING SKILLS</i>
+                                            </p>
+                                            <p id="content_title" style="font-weight: bolder; font-size: 16px; margin: 4px">
+                                                (KETERAMPILAN PERENCANAAN AKADEMIK) SISWA SMA
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -65,13 +70,15 @@ $now = \Carbon\Carbon::now();
                                 </div>
                             </div>
                             <div class="row vertical-align">
-                                <div class="col-sm-2  col-sm-offset-1 text-left">
+                                <div class="col-sm-1 ">
+                                </div>
+                                <div class="col-sm-2 text-left">
                                     <p class="margin-left-1-cm">Nama</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
                                     <p>: {{$student->getAttribute('name')}}</p>
                                 </div>
-                                <div class="col-sm-2  col-sm-offset-1 text-left">
+                                <div class="col-sm-2 text-left">
                                     <p>Sekolah</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
@@ -79,13 +86,15 @@ $now = \Carbon\Carbon::now();
                                 </div>
                             </div>
                             <div class="row vertical-align">
-                                <div class="col-sm-2 col-sm-offset-1 text-left">
-                                    <p class="margin-left-1-cm">NISN</p>
+                                <div class="col-sm-1 ">
+                                </div>
+                                <div class="col-sm-2 text-left">
+                                    <p class="margin-left-1-cm">NIS</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
                                     <p>: {{$student->getAttribute('credential')}}</p>
                                 </div>
-                                <div class="col-sm-2  col-sm-offset-1 text-left">
+                                <div class="col-sm-2 text-left">
                                     <p>Jenis Kelamin</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
@@ -93,14 +102,16 @@ $now = \Carbon\Carbon::now();
                                 </div>
                             </div>
                             <div class="row vertical-align">
-                                <div class="col-sm-2  col-sm-offset-1 text-left">
+                                <div class="col-sm-1 ">
+                                </div>
+                                <div class="col-sm-2 text-left">
                                     <p class="margin-left-1-cm">Kelas</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
                                     <p>: {{$studentProfile->getAttribute('grade')}}</p>
                                 </div>
-                                <div class="col-sm-2  col-sm-offset-1 text-left">
-                                    <p>Tanggal Pengisian</p>
+                                <div class="col-sm-2 text-left">
+                                    <p>Pengisian</p>
                                 </div>
                                 <div class="col-sm-3 no-padding-side">
                                     <p>: {{$studentAnswer->getAttribute('finished_at')->formatLocalized('%d %B %Y')}}</p>
@@ -110,8 +121,18 @@ $now = \Carbon\Carbon::now();
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-10 text-center">
-                                    <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
-                                    <b><?php printf("%.4g%%", $accumulation) ?></b>
+                                    <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 8px">HASIL ANALISA</p>
+                                    <p style="text-align: justify">Berdasarkan pengisian inventori “
+                                        <i>Academic Planning Skills</i>
+                                                                   ” (Keterampilan Perencanaan Akademik)”
+                                        <b>{{$student->getAttribute('name')}}</b>
+                                                                   memiliki keterampilan perencanaan akademik sebesar
+                                        <b>{{sprintf("%.4g%%", $accumulation)}}</b>
+                                                                   dan termasuk dalam klasifikasi
+                                        <b>{{array_values(array_filter($analytics, function($analytic) use ($accumulation){
+                                    return (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])));
+                                }))[0]['class']}}</b>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
@@ -125,38 +146,48 @@ $now = \Carbon\Carbon::now();
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th width="150" class="text-center font-size-14px">
+                                            <th width="150" class="text-center ">
                                                 <b>Interval Persentase</b>
                                             </th>
-                                            <th width="150" class="text-center font-size-14px">
+                                            <th width="150" class="text-center ">
                                                 <b>Klasifikasi</b>
                                             </th>
-                                            <th class="text-center font-size-14px">
+                                            <th class="text-center ">
                                                 <b>Interpretasi</b>
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td class="font-size-12px text-center">
-                                                <strong>{{$analytics['interval']}}</strong>
-                                            </td>
-                                            <td class="font-size-12px text-center">
-                                                <strong>{{$analytics['class']}}</strong>
-                                            </td>
-                                            <td class="font-size-12px text-center">
-                                                <strong>{{$analytics['description']['key']}}</strong>
-                                                <ol>
-                                                    @foreach($analytics['description']['value'] as $interpretation)
-                                                        <li class="text-left">
-                                                            <strong>{{$interpretation}}</strong>
-                                                        </li>
-                                                    @endforeach
-                                                </ol>
-                                            </td>
-                                        </tr>
+                                        @foreach($analytics as $analytic)
+                                            <?php
+                                            $pre_strong = $post_strong = '';
+                                            if (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])))
+                                            {
+                                                $pre_strong  = '<strong>';
+                                                $post_strong = '</strong>';
+                                            }
+                                            ?>
+                                            <tr>
+                                                <td class="text-center">
+                                                    {!! $pre_strong.$analytic['interval'].$post_strong!!}
+                                                </td>
+                                                <td class="text-center">
+                                                    {!! $pre_strong.$analytic['class'].$post_strong!!}
+                                                </td>
+                                                <td class="text-left">
+                                                    {!! $pre_strong.$analytic['description']['key'].$post_strong!!}
+                                                    <br>
+                                                    {!! $pre_strong.$analytic['description']['value'].$post_strong!!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
+                                    <p class="text-left " style="margin-top: 12px">
+                                        {!! sprintf(array_values(array_filter($analytics, function($analytic) use ($accumulation){
+                                            return (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])));
+                                        }))[0]['recommendation'],$student->getAttribute('name'))!!}
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
