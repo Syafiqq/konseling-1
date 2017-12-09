@@ -64,8 +64,6 @@ class Course extends Controller
      */
     public function startEdit($question, AnswerDetail $answer)
     {
-        var_dump(Session::get('cbk_msg', null));
-
         $question = intval($question);
         $answers  = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last()->answer_detail()->skip($question - 2)->take(3)->get();
         $current  = $answer;
