@@ -21,7 +21,7 @@ class Home extends Controller
         return view(" layout.counselor.dashboard.index.counselor_dashboard_index_$this->theme", compact('coupons'));
     }
 
-    public function couponGenerator()
+    public function couponGenerator($usage)
     {
         /** @noinspection PhpUndefinedMethodInspection */
         /** @var User $user */
@@ -32,6 +32,7 @@ class Home extends Controller
             try
             {
                 $coupon = new Coupon(['coupon' => $code]);
+                $coupon->setAttribute('usage', $usage);
                 $user->coupon()->save($coupon);
                 break;
             }
@@ -40,8 +41,7 @@ class Home extends Controller
             }
             $code = $this->generate();
         }
-        $redirect = redirect()->intended(route('counselor.home.dashboard'))->with('cbk_msg', ['message' => ["Kode : $code"], 'notify' => ['Kode Berhasil Ditambahkan']]);
 
-        return $redirect;
+        return redirect()->back()->with('cbk_msg', ['message' => ["Kode : $code"], 'notify' => ['Kode Berhasil Ditambahkan']]);
     }
 }
