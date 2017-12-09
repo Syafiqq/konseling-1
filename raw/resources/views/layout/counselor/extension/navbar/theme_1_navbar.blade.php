@@ -20,6 +20,11 @@
             <ul class="nav navbar-nav">
                 {!! isset($pre_right_menu) ? $pre_right_menu : ''!!}
                 <li>
+                    <a href="" id="music-opener" data-toggle="modal" data-target="#music-modal">
+                        <i class="fa fa-music"></i>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('counselor.auth.logout')}}">
                         <i class="fa fa-power-off"></i>
                     </a>
