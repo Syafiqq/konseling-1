@@ -10,9 +10,6 @@ class Report extends Controller
 {
     public function index()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         $reports = User::with(['student', 'answer'])->where('role', '=', 'student')->get();
 
         return view("layout.counselor.report.list.counselor_report_list_$this->theme", compact('reports'));
