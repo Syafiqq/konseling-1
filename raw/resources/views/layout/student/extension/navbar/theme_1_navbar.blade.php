@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{route('student.home.dashboard')}}" class="logo">
+    <a href="{{route('student.course.index')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>K</b></span>
         <!-- logo for regular state and mobile devices -->
