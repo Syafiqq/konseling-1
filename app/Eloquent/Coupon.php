@@ -28,7 +28,7 @@ class Coupon extends Model
     /**
      * @var array
      */
-    protected $guarded = ['id', 'assignee', 'created_at'];
+    protected $guarded = ['id', 'usage', 'assignee', 'created_at'];
     /**
      * @var array
      */
@@ -60,6 +60,24 @@ class Coupon extends Model
     protected function getDateFormat()
     {
         return 'Y-m-d H:i:s';
+    }
+
+    public function getHumanReadableUsage()
+    {
+        if (empty($this->getAttribute('usage')))
+        {
+            return null;
+        }
+        else
+        {
+            switch ($this->getAttribute('usage'))
+            {
+                case 'counselor':
+                    return 'Konselor';
+                case 'student':
+                    return 'Siswa';
+            }
+        }
     }
 }
 
