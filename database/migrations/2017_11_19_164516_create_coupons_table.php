@@ -41,6 +41,7 @@ class CreateCouponsTable extends Migration
                 $table->increments('id');
                 $table->string('coupon', 20)->unique();
                 $table->integer('assignee')->unsigned();
+                $table->enum('usage', ['student', 'counselor']);
                 $table->timestamp('created_at')->default($db->raw('CURRENT_TIMESTAMP'));
 
                 $table->foreign('assignee')
