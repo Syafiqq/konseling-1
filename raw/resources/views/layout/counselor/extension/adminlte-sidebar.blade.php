@@ -3,6 +3,10 @@
 /** @var \Collective\Html\FormBuilder $form */
 setlocale(LC_TIME, 'Indonesian');
 \Carbon\Carbon::setLocale('id');
+if (isset($errors))
+{
+    \Illuminate\Support\Facades\Session::push('cbk_msg', $errors->all());
+}
 ?>
 
 
