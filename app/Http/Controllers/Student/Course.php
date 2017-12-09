@@ -133,9 +133,6 @@ class Course extends Controller
 
     public function result()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         $categories = QuestionCategory::all();
         $report     = \Illuminate\Support\Facades\Auth::user();
 
