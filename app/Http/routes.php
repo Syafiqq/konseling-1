@@ -31,7 +31,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
         $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'counselor.home.dashboard']);
         $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'counselor.profile.edit']);
         $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'counselor.profile.update']);
-        $router->get('/coupon/generate', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator']);
+        $router->get('/coupon/generate/{usage}', ['uses' => 'Home@couponGenerator', 'as' => 'counselor.coupon.generator'])->where('usage', 'counselor|student');
         $router->group(['prefix' => '/report', 'middleware' => 'valid.counselor.profile'], function () use ($router) {
             $router->get('', ['uses' => 'Report@index', 'as' => 'counselor.report.list']);
             $router->group(['prefix' => '/student', 'middleware' => ['valid.student']], function () use ($router) {
