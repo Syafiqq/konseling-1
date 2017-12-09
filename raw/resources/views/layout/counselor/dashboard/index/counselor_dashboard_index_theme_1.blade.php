@@ -1,9 +1,4 @@
 @extends('layout.counselor.extension.adminlte-sidebar')
-<?php
-/** @var \Collective\Html\FormBuilder $form */
-setlocale(LC_TIME, 'Indonesian');
-\Carbon\Carbon::setLocale('id');
-?>
 @section('head-title')
     <title>Dashboard</title>
 @endsection
