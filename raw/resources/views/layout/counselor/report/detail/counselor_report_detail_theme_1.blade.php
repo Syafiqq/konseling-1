@@ -31,8 +31,10 @@ $student = $report->getAttribute('student');
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-home"></i>
-                    Report
+                    <a href="{{route('counselor.report.list')}}">
+                        <i class="fa fa-home"></i>
+                        Report
+                    </a>
                 </li>
                 <li class="active">
                     <i class="fa fa-list"></i>

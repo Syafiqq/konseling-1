@@ -29,12 +29,16 @@ $now = \Carbon\Carbon::now();
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-home"></i>
-                    Report
+                    <a href="{{route('counselor.report.list')}}">
+                        <i class="fa fa-home"></i>
+                        Report
+                    </a>
                 </li>
                 <li>
-                    <i class="fa fa-list"></i>
-                    Detail
+                    <a href="{{route('counselor.student.detail', [$student->getKey()])}}">
+                        <i class="fa fa-list"></i>
+                        Detail
+                    </a>
                 </li>
                 <li class="active">
                     <i class="fa fa-print"></i>
@@ -278,6 +282,9 @@ $now = \Carbon\Carbon::now();
 @endsection
 
 @section('body-content-navbar')
-    @include('layout.counselor.extension.navbar.theme_1_navbar', ['pre_right_menu' => "<li><a href=\"\" id=\"print\" ><i class=\"fa fa-print\"></i></a></li>"])
+    <?php
+    $detailPage = route('counselor.student.detail', [$student->getKey()]);
+    ?>
+    @include('layout.counselor.extension.navbar.theme_1_navbar', ['pre_right_menu' => "<li><a href=\"$detailPage\"><i class=\"fa fa-arrow-left\"></i></a></li><li><a href=\"\" id=\"print\" ><i class=\"fa fa-print\"></i></a></li>"])
 @endsection
 
