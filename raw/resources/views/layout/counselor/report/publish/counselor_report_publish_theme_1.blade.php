@@ -28,9 +28,17 @@ $now = \Carbon\Carbon::now();
                 &nbsp;
             </h1>
             <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    Report
+                </li>
+                <li>
+                    <i class="fa fa-list"></i>
+                    Detail
+                </li>
                 <li class="active">
                     <i class="fa fa-print"></i>
-                    <a href="" id="print">Cetak</a>
+                    Print
                 </li>
             </ol>
         </section>
@@ -249,3 +257,8 @@ $now = \Carbon\Carbon::now();
     <script type="text/javascript" src="{{asset('/assets/vendor/jQuery.print/jQuery.print.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/layout/counselor/report/publish/counselor_report_publish_theme_1.min.js')}}"></script>
 @endsection
+
+@section('body-content-navbar')
+    @include('layout.counselor.extension.navbar.theme_1_navbar', ['pre_right_menu' => "<li><a href=\"\" id=\"print\" ><i class=\"fa fa-print\"></i></a></li>"])
+@endsection
+

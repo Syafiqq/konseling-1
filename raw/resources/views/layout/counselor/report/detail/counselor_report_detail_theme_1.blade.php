@@ -30,11 +30,11 @@ $student = $report->getAttribute('student');
                 &nbsp;
             </h1>
             <ol class="breadcrumb">
-                <li class="active">
+                <li>
                     <i class="fa fa-home"></i>
                     Report
                 </li>
-                <li>
+                <li class="active">
                     <i class="fa fa-list"></i>
                     Detail
                 </li>
