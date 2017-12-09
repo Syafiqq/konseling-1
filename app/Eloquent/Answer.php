@@ -48,6 +48,38 @@ class Answer extends Model
         return $this->hasMany('App\Eloquent\AnswerDetail', 'answer_code', 'id');
     }
 
+    public function getResultAnalytics($accumulation)
+    {
+        $accumulation = doubleval($accumulation);
+        $analytics    = [];
+        if (($accumulation >= 0.0) && ($accumulation <= 33.3))
+        {
+            $analytics['interval']    = '0 - 33%';
+            $analytics['class']       = 'Rendah';
+            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Rendah']];
+        }
+        else if (($accumulation > 33.3) && ($accumulation <= 66.6))
+        {
+            $analytics['interval']    = '34 - 66%';
+            $analytics['class']       = 'Sedang';
+            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Sedang']];
+        }
+        else if (($accumulation > 66.6) && ($accumulation <= 100.0))
+        {
+            $analytics['interval']    = '67 - 100%';
+            $analytics['class']       = 'Tinggi';
+            $analytics['description'] = ['key' => 'Ini Adalah Key : ', 'value' => ['Deskripsi Tinggi']];
+        }
+        else
+        {
+            $analytics['interval']    = '-';
+            $analytics['class']       = '-';
+            $analytics['description'] = ['key' => '-', 'value' => ['-']];
+        }
+
+        return $analytics;
+    }
+
     /**
      * @return string
      */
