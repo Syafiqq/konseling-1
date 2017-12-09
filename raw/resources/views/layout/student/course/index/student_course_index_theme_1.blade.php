@@ -47,20 +47,29 @@ $now = \Carbon\Carbon::now();
                 <div class="box-body">
                     <div class="col-sm-12">
                         <ol>
-                            <li>Isilah angket dengan kejujuran dan apa adanya sesuai dengan kondisi diri anda. Hasil angket ini tidak akan mempengaruhi nilai mata pelajaran apapun. Kejujuran anda dalam mengisi angket ini akan mempengaruhi pemahaman anda terkait kondisi diri anda.</li>
-                            <li>Isilah setiap pernyataan menurut pendapat Anda dengan memilih satu dari empat alternatif jawaban yang telah disediakan, yaitu:</li>
-                            <dl class="dl-horizontal" style="margin-top: 10px; margin-bottom: 10px">
-                                <dt>Sangat Sesuai</dt>
-                                <dd>: Apabila kondisi yang digambarkan pada item sangat sesuai dengen diri anda</dd>
-                                <dt>Sesuai</dt>
-                                <dd>: Apabila kondisi yang digambarkan pada item cukup sesuai dengen diri anda</dd>
-                                <dt>Kurang Sesuai</dt>
-                                <dd>: Apabila kondisi yang digambarkan pada item kurang sesuai dengen diri anda</dd>
-                                <dt>Tidak Sesuai</dt>
-                                <dd>: Apabila kondisi yang digambarkan pada item tidak sesuai dengen diri anda</dd>
-                            </dl>
-                            <li>Periksa kembali jawaban Anda dan pastikan tidak ada jawaban yang terlewatkan.</li>
+                            <li>Bacalah pernyataan dengan cermat dan teliti</li>
+                            <li>Pilih salah satu pilihan jawaban yang sesuai dengan keadaan diri Anda.</li>
+                            <li>Isilah semua pernyataan, jangan sampai ada pernyataan yang kosong.</li>
+                            <li>Teliti kembali pekerjaan Anda sebelum anda mengumpulkan hasil pengerjaan dengan mengklik menu
+                                <strong>Selesai</strong>
+                                .
+                            </li>
+                            <li>Inventori ini tidak memengaruhi nilai akademik apapun, jadi pilihlah jawaban yang benar-benar menggambarkan diri Anda..</li>
                         </ol>
+                        <hr>
+                        <p>
+                            <strong>Pilihan Jawaban beserta Keterangan :</strong>
+                        </p>
+                        <dl class="dl-horizontal" style="margin-top: 10px; margin-bottom: 10px">
+                            <dt>Sangat Sesuai</dt>
+                            <dd>: Apabila item pernyataan sangat mencerminkan kondisi diri anda.</dd>
+                            <dt>Sesuai</dt>
+                            <dd>: Apabila item pernyataan cukup mencerminkan kondisi diri anda.</dd>
+                            <dt>Kurang Sesuai</dt>
+                            <dd>: Apabila item pernyataan kurang mencerminkan kondisi diri anda.</dd>
+                            <dt>Tidak Sesuai</dt>
+                            <dd>: Apabila item pernyataan tidak mencerminkan kondisi diri anda.</dd>
+                        </dl>
                     </div>
                 </div>
                 <!-- /.box-body -->
