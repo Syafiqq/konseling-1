@@ -19,10 +19,27 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 {!! isset($pre_right_menu) ? $pre_right_menu : ''!!}
-                <li>
-                    <a href="{{route('counselor.coupon.generator')}}">
+                <li class="dropdown messages-menu">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-ticket"></i>
+                        <span class="label label-success"></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><!-- start message -->
+                            <a href="{{route('counselor.coupon.generator', ['counselor'])}}">
+                                <i class="fa fa-ticket"></i>
+                                <span>Konselor</span>
+                                <span class="pull-right-container"></span>
+                            </a>
+                        </li>
+                        <li><!-- start message -->
+                            <a href="{{route('counselor.coupon.generator', ['student'])}}">
+                                <i class="fa fa-ticket"></i>
+                                <span>Siswa</span>
+                                <span class="pull-right-container"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="" id="music-opener" data-toggle="modal" data-target="#music-modal">
