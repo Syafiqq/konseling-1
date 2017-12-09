@@ -165,7 +165,7 @@ $now = \Carbon\Carbon::now();
                                     <th width="150" class="text-center font-size-14px">
                                         <b>Interval Persentase</b>
                                     </th>
-                                    <th width="150" class="text-center font-size-14px">
+                                    <th width="100" class="text-center font-size-14px">
                                         <b>Klasifikasi</b>
                                     </th>
                                     <th class="text-center font-size-14px">
