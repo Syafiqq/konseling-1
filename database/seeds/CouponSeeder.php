@@ -25,6 +25,7 @@ class CouponSeeder extends Seeder
         /** @var User $admin */
         if ($admin = $model->where('credential', '=', $nip)->first())
         {
+            $role  = ['student', 'counselor'];
             $count = 6;
             while (--$count)
             {
@@ -32,7 +33,7 @@ class CouponSeeder extends Seeder
                 {
                     try
                     {
-                        $coupon = new Coupon(['coupon' => $this->generate()]);
+                        $coupon = new Coupon(['coupon' => $this->generate(), 'usage' => $role[rand(0, 5) % 2]]);
                         $admin->coupon()->save($coupon);
                         break;
                     }
