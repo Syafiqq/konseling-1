@@ -18,6 +18,7 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                {!! isset($pre_right_menu) ? $pre_right_menu : ''!!}
                 <li>
                     <a href="{{route('counselor.auth.logout')}}">
                         <i class="fa fa-power-off"></i>
