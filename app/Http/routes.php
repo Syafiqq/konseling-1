@@ -53,11 +53,10 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
         $router->get('/auth/logout', ['uses' => 'Auth@getLogout', 'as' => 'student.auth.logout']);
-        $router->get('/dashboard', ['uses' => 'Home@index', 'as' => 'student.home.dashboard']);
+        $router->get('/dashboard', ['uses' => 'Course@index', 'as' => 'student.course.index']);
         $router->get('/profile', ['uses' => 'Profile@edit', 'as' => 'student.profile.edit']);
         $router->patch('/profile', ['uses' => 'Profile@update', 'as' => 'student.profile.update']);
         $router->group(['middleware' => 'valid.student.profile'], function () use ($router) {
-            $router->get('/course', ['uses' => 'Course@index', 'as' => 'student.course.index']);
             $router->get('/course/create', ['middleware' => 'course.open.unavailable', 'uses' => 'Course@create', 'as' => 'student.course.create']);
             $router->get('/course/start/{question}', ['middleware' => ['course.open.available', 'valid.question'], 'uses' => 'Course@startEdit', 'as' => 'student.course.start.edit'])->where('question', '^[1-9][0-9]*');
             $router->patch('/course/start/{question}', ['middleware' => ['course.open.available', 'valid.question', 'valid.answer'], 'uses' => 'Course@startUpdate', 'as' => 'student.course.start.update'])->where('question', '^[1-9][0-9]*');
