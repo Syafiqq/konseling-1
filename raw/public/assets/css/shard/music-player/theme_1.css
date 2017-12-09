@@ -15,6 +15,10 @@ div#cover .panel {
     height: 34px;
 }
 
+div#cover li.list-group-item.active {
+    background: green;
+}
+
 div#cover #playlist, div#cover audio {
     width: 100%;
 }
