@@ -18,13 +18,13 @@ class UserCounselorsSeeder extends Seeder
 
     public function run()
     {
-        $nip = '125150200111112';
+        $nip = '120111409964';
         /** @var \Illuminate\Database\Query\Builder $user */
         $user = new User();
         if (!$user->where('credential', '=', $nip)->first())
         {
             $user->setAttribute('credential', $nip);
-            $user->setAttribute('name', 'Admin');
+            $user->setAttribute('name', 'Husni Hanafi');
             $user->setAttribute('gender', 'male');
             $user->setAttribute('role', 'counselor');
             $user->setAttribute('avatar', $this->generate($user->getAttribute('gender')));
@@ -32,9 +32,9 @@ class UserCounselorsSeeder extends Seeder
             $user->save();
 
             $counselor = new UserCounselors();
-            $counselor->setAttribute('school', 'UM');
-            $counselor->setAttribute('school_head', 'UM Head');
-            $counselor->setAttribute('school_head_credential', 'UM Credential');
+            $counselor->setAttribute('school', 'SMA Negeri 0 Malang');
+            $counselor->setAttribute('school_head', 'Sutidjo, S.Pd, M.Pd');
+            $counselor->setAttribute('school_head_credential', '19451708199008230002');
 
             $user->counselor()->save($counselor);
         }
