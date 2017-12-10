@@ -51,7 +51,7 @@ if (!isset($categories))
                             <th>Mulai Pengisian</th>
                             <th>Pengisian Selesai</th>
                             @foreach (/** @var \App\Eloquent\QuestionCategory $category */$categories as $category)
-                                <th>{{ $category->getAttribute('description') }}</th>
+                                <th>{{ $category->getAttribute('name') }}</th>
                             @endforeach
                             <th>Detail</th>
                         </tr>
