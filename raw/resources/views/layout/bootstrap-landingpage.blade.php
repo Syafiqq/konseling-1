@@ -22,7 +22,7 @@ if (!is_null($session->get('cbk_msg')))
     <link rel="stylesheet" href="{{asset('/assets/vendor/ionicons/dist/css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/nprogress/nprogress.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/icheck/skins/square/blue.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/assets/baked/landingpage/vendor/simple-line-icons/css/simple-line-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/baked/landingpage/vendor/simple-line-icons/css/simple-line-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/baked/landingpage/css/stylish-portfolio.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/common/common-style.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/shard/music-player/theme_1.min.css')}}">
