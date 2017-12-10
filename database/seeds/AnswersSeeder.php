@@ -15,10 +15,8 @@ class AnswersSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['user' => '2', 'started_at' => '2017-11-30 07:00:00'],
-            ['user' => '3', 'started_at' => '2017-11-30 07:00:00', 'finished_at' => '2017-11-30 08:00:00'],
-            ['user' => '4', 'started_at' => '2017-11-26 07:00:00', 'finished_at' => '2017-11-26 08:00:00'],
-            ['user' => '4', 'started_at' => '2017-11-30 07:00:00', 'finished_at' => '2017-11-30 08:00:00'],
+            ['user' => '2', 'started_at' => '2017-11-30 07:00:00', 'finished_at' => '2017-11-30 08:00:00'],
+            ['user' => '2', 'started_at' => '2017-12-02 07:00:00'],
         ];
 
         /** @var \Illuminate\Database\Query\Builder $model */
