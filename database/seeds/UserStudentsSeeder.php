@@ -22,10 +22,7 @@ class UserStudentsSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['credential' => '10000', 'name' => 'Student-1', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 0]],
-            ['credential' => '10001', 'name' => 'Student-2', 'gender' => 'female', 'role' => 'student', 'avatar' => $this->generate('female'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]],
-            ['credential' => '10002', 'name' => 'Student-3', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 0]],
-            ['credential' => '10003', 'name' => 'Student-4', 'gender' => 'female', 'role' => 'student', 'avatar' => $this->generate('female'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]],
+            ['credential' => '10000', 'name' => 'Abdul Fatah', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]]
         ];
 
         /** @var \Illuminate\Database\Query\Builder $model */
