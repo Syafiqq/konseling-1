@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthFlow;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
 class Auth extends Controller
 {
@@ -20,9 +19,6 @@ class Auth extends Controller
 
     public function registerCreate()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         return view("layout.student.auth.register.student_auth_register_$this->theme");
     }
 
