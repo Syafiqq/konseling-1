@@ -4,11 +4,11 @@
 $form = \Collective\Html\FormFacade::getFacadeRoot();
 ?>
 @section('head-title')
-    <title>Login</title>
+    <title>Register</title>
 @endsection
 
 @section('head-description')
-    <meta name="description" content="Login">
+    <meta name="description" content="Register">
 @endsection
 
 @section('body-content')
@@ -35,10 +35,10 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                         <a href="{{route('counselor.auth.login.get')}}">Masuk Akun Konselor</a>
                     </li>
                     <li>
-                        <a href="{{route('student.auth.register.create')}}">Daftar Akun Siswa</a>
+                        <a href="{{route('student.auth.login.get')}}">Masuk Akun Siswa</a>
                     </li>
                     <li>
-                        <a href="{{route('student.auth.login.get')}}">Masuk Akun Siswa</a>
+                        <a href="{{route('counselor.auth.register.create')}}">Daftar Akun Konselor</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +58,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
             <div class="registrationform">
                 {!! $form->open(['route' => 'student.auth.register.store', 'method' => 'post', 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Pendaftaran Akun Konselor
+                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Pendaftaran Akun Siswa
                         <i class="fa fa-pencil pull-right"></i>
                     </legend>
                     <div class="form-group">
