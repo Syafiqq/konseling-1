@@ -22,6 +22,7 @@ if (!is_null($session->get('cbk_msg')))
     <link rel="stylesheet" href="{{asset('/assets/vendor/ionicons/dist/css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/nprogress/nprogress.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/baked/authentication/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/icheck/skins/square/blue.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/common/common-style.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/shard/music-player/theme_1.min.css')}}">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond">
@@ -46,6 +47,7 @@ if (!is_null($session->get('cbk_msg')))
     <script type="text/javascript" src="{{asset('/assets/vendor/nprogress/nprogress.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/vendor/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/baked/authentication/js/jquery.backstretch.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/vendor/icheck/icheck.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/baked/authentication/js/default-backstretch.min.js')}}"></script>
     <script type="text/javascript">
         {!! 'var sessionFlashdata = ' . json_encode($flashdata)!!}
