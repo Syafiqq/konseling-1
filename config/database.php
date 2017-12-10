@@ -55,9 +55,9 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => 'mysql.hostinger.co.id',
-            'database' => 'u633788398_famim',
-            'username' => 'u633788398_famim',
-            'password' => 'famimafamima',
+            'database' => 'u956187105_aplas',
+            'username' => 'u956187105_aplas',
+            'password' => 'aplasfamima',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
