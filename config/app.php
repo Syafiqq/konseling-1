@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG'),
+    'debug' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'https://bkum-famima-aplas.000webhostapp.com/',
+    'url' => 'http://konseling-1.esy.es/',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => 'WMNBD2vU5LpdfrBlmF60uDLlSavCdJoH',
 
     'cipher' => MCRYPT_RIJNDAEL_128,
 
