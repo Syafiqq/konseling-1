@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller
 {
@@ -33,10 +32,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
-        return view('welcome');
+        return view('layout.landing-page.landing-page_theme_1');
     }
 
 }
