@@ -3,9 +3,16 @@
 /** @var \Collective\Html\FormBuilder $form */
 setlocale(LC_TIME, 'Indonesian');
 \Carbon\Carbon::setLocale('id');
+/** @var \Illuminate\Session\Store $session */
+$session = \Illuminate\Support\Facades\Session::getFacadeRoot();
+$flashdata = ['notify' => []];
 if (isset($errors))
 {
-    \Illuminate\Support\Facades\Session::push('cbk_msg', $errors->all());
+    $flashdata['notify'] = array_merge($flashdata['notify'], $errors->all());
+}
+if (!is_null($session->get('cbk_msg')))
+{
+    $flashdata = array_merge($flashdata, $session->get('cbk_msg'));
 }
 ?>
 
@@ -49,7 +56,7 @@ if (isset($errors))
 @section('body-js-lower-post')
     @parent
     <script type="text/javascript">
-        {!! 'var sessionFlashdata = ' . json_encode(\Illuminate\Support\Facades\Session::get('cbk_msg'))!!}
+        {!! 'var sessionFlashdata = ' . json_encode($flashdata)!!}
     </script>
     <script type="text/javascript" src="{{asset('/assets/js/common/common_function.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/shard/music-player/theme_1.min.js')}}"></script>
