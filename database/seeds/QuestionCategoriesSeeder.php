@@ -15,9 +15,12 @@ class QuestionCategoriesSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'c-1', 'description' => 'Category-1'],
-            ['name' => 'c-2', 'description' => 'Category-2'],
-            ['name' => 'c-3', 'description' => 'Category-3']
+            ['name' => 'Kategori 1', 'description' => 'Menentukan pencapaian target akademik'],
+            ['name' => 'Kategori 2', 'description' => 'Menentukan tujuan akademik secara objektif'],
+            ['name' => 'Kategori 3', 'description' => 'Menentukan metode / strategi pencapaian tujuan akademik'],
+            ['name' => 'Kategori 4', 'description' => 'Mengelola waktu pelaksanaan akademik'],
+            ['name' => 'Kategori 5', 'description' => 'Mencari sumber yang dibutuhkan untuk mendukung pencapaian tujuan akademik'],
+            ['name' => 'Kategori 6', 'description' => 'Melaksanakan tanggung jawab akademik']
         ];
 
         /** @var \Illuminate\Database\Query\Builder $model */
