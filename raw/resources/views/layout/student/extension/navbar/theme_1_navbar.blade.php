@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="{{route('student.course.index')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>K</b></span>
+        <span class="logo-mini"><b>F-A</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Konseling</b></span>
+        <span class="logo-lg"><b>Famima - APlaS</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
