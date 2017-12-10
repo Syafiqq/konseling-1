@@ -23,9 +23,6 @@ class Auth extends Controller
 
     public function registerCreate()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(Session::get('cbk_msg', null));
-
         return view("layout.counselor.auth.register.counselor_auth_register_$this->theme");
     }
 
