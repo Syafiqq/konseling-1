@@ -83,7 +83,7 @@ gulp.task('minify-public-json', function () {
 gulp.task('minify-resources-views-1', function () {
     return gulp.src(['./raw/resources/views/**/*.{php,blade.php,html}'], {dot: true, base: './raw/resources/views/'})
         .pipe(phpMinify({silent: true}))
-        .pipe(htmlmin({
+        /*.pipe(htmlmin({
             collapseWhitespace: true,
             removeAttributeQuotes: true,
             processConditionalComments: true,
@@ -92,14 +92,14 @@ gulp.task('minify-resources-views-1', function () {
             minifyCSS: true,
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true
-        }))
+        }))*/
         .pipe(gulp.dest('./resources/views/'));
 });
 
 gulp.task('minify-resources-views-2', function () {
     return gulp.src(['./resources/views/**/*.{php,blade.php,html}'], {dot: true, base: './resources/views/'})
         .pipe(phpMinify({silent: true}))
-        .pipe(htmlmin({
+        /*.pipe(htmlmin({
             collapseWhitespace: true,
             removeAttributeQuotes: true,
             processConditionalComments: true,
@@ -108,7 +108,7 @@ gulp.task('minify-resources-views-2', function () {
             minifyCSS: true,
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true
-        }))
+        }))*/
         .pipe(gulp.dest('./resources/views/'));
 });
 
@@ -134,7 +134,8 @@ gulp.task('minify-public-assets-vendor-js', function (cb) {
             gulp.src(gpath.assetsVendorResource(false, '*.js')
                     .concat([
                         '!./node_modules/popper.js/**/popper-utils.js',
-                        '!./node_modules/popper.js/**/popper.js'
+                        '!./node_modules/popper.js/**/popper.js',
+                        '!./node_modules/jquery.easing/bower_components/**'
                     ])
                     .concat(gpath.assetsVendorResource(true, '*.min.js')),
                 {dot: true, base: './node_modules/'})
