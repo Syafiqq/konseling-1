@@ -77,13 +77,21 @@ if (!isset($categories))
                                             return intval($result->getAttribute('category')) === $category->getKey();
                                         })->first();
                                     ?>
-                                    <td>{{ $isInProcess ? '-' : (is_null($result) ? '-' : sprintf("%.4g", doubleval($result->getAttribute('result')))) }}</td>
+                                    <td>{{ $isInProcess ? '-' : (is_null($result) ? '-' : sprintf("%.4g%%", doubleval($result->getAttribute('result')))) }}</td>
                                 @endforeach
                                 <td>{!! $isInProcess ? '-' : link_to_route('student.course.detail', $title = 'Detail', $parameters = [$answer->getKey()], $attributes = []); !!}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <dl class="dl-horizontal">
+                            @foreach (/** @var \App\Eloquent\QuestionCategory $category */$categories as $category)
+                                <dt>{{ $category->getAttribute('name') }}</dt>
+                                <dd>{{ $category->getAttribute('description') }}</dd>
+                            @endforeach
+                        </dl>
+                    </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
