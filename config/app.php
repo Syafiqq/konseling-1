@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'https://konseling.1.com',
+    'url' => 'https://bkum-famima-aplas.000webhostapp.com/',
 
     /*
     |--------------------------------------------------------------------------
