@@ -19,14 +19,14 @@ class CouponSeeder extends Seeder
 
     public function run()
     {
-        $nip = '125150200111112';
+        $nip = '120111409964';
         /** @var \Illuminate\Database\Query\Builder $model */
         $model = new User;
         /** @var User $admin */
         if ($admin = $model->where('credential', '=', $nip)->first())
         {
             $role  = ['student', 'counselor'];
-            $count = 6;
+            $count = 11;
             while (--$count)
             {
                 while (1)
