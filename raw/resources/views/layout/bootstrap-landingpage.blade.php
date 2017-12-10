@@ -53,3 +53,7 @@ if (!is_null($session->get('cbk_msg')))
     <script type="text/javascript" src="{{asset('/assets/js/common/common_function.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/shard/music-player/theme_1.min.js')}}"></script>
 @endsection
+
+@section('body-property')
+    <body id="page-top">
+@endsection
