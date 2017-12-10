@@ -26,22 +26,18 @@ class AnswerResultsSeeder extends Seeder
                 ['answer_code' => 1, 'category' => 1, 'result' => 0.0],
                 ['answer_code' => 1, 'category' => 2, 'result' => 0.0],
                 ['answer_code' => 1, 'category' => 3, 'result' => 0.0],
+                ['answer_code' => 1, 'category' => 4, 'result' => 0.0],
+                ['answer_code' => 1, 'category' => 5, 'result' => 0.0],
+                ['answer_code' => 1, 'category' => 6, 'result' => 0.0],
             ],
             [
                 ['answer_code' => 2, 'category' => 1, 'result' => 0.0],
                 ['answer_code' => 2, 'category' => 2, 'result' => 0.0],
                 ['answer_code' => 2, 'category' => 3, 'result' => 0.0],
+                ['answer_code' => 2, 'category' => 4, 'result' => 0.0],
+                ['answer_code' => 2, 'category' => 5, 'result' => 0.0],
+                ['answer_code' => 2, 'category' => 6, 'result' => 0.0],
             ],
-            [
-                ['answer_code' => 3, 'category' => 1, 'result' => 0.0],
-                ['answer_code' => 3, 'category' => 2, 'result' => 0.0],
-                ['answer_code' => 3, 'category' => 3, 'result' => 0.0],
-            ],
-            [
-                ['answer_code' => 4, 'category' => 1, 'result' => 0.0],
-                ['answer_code' => 4, 'category' => 2, 'result' => 0.0],
-                ['answer_code' => 4, 'category' => 3, 'result' => 0.0],
-            ]
         ];
 
         /** @var \Illuminate\Database\Query\Builder $model */
@@ -62,7 +58,7 @@ class AnswerResultsSeeder extends Seeder
 
     private function calculate()
     {
-        $data = [1, 2, 3, 4];
+        $data = [1];
 
         foreach ($data as $answer_code)
         {
