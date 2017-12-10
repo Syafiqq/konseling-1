@@ -20,6 +20,7 @@ module.exports = {
             (negated ? '!' : '') + './node_modules/datatables.net-dt/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/datatables.net-bs/**' + (mime === null ? '' : '/' + mime),
             (negated ? '!' : '') + './node_modules/jQuery.print/**' + (mime === null ? '' : '/' + mime),
+            (negated ? '!' : '') + './/node_modules/icheck/**' + (mime === null ? '' : '/' + mime)
         ];
     }
 };
