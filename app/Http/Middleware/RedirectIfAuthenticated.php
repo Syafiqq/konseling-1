@@ -1,9 +1,7 @@
 <?php namespace App\Http\Middleware;
 
-use App\Eloquent\User;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\RedirectResponse;
 
 class RedirectIfAuthenticated
 {
@@ -36,10 +34,7 @@ class RedirectIfAuthenticated
     {
         if ($this->auth->check())
         {
-            /** @var User $user */
-            $user = $this->auth->user();
-
-            return new RedirectResponse(url("/{$user->getAttribute('role')}/dashboard"));
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Tidak Dapat Mengakses Halaman Tersebut']]);
         }
 
         return $next($request);
