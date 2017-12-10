@@ -56,7 +56,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
-                {!! $form->open(['route' => 'student.auth.login.post', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+                {!! $form->open(['route' => 'counselor.auth.login.post', 'method' => 'post', 'class' => 'form-horizontal']) !!}
                 <fieldset>
                     <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Masuk Akun Konselor
                         <i class="fa fa-pencil pull-right"></i>
