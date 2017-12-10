@@ -1,4 +1,8 @@
 @extends('layout.bootstrap-landingpage')
+<?php
+/** @var \Collective\Html\HtmlBuilder $html */
+$html = \Collective\Html\HtmlFacade::getFacadeRoot();
+?>
 @section('head-title')
     <title>APLAS</title>
 @endsection
@@ -35,11 +39,11 @@
     <!-- Header -->
     <header class="masthead d-flex">
         <div class="container text-center my-auto">
-            <h1 class="mb-1">Famima - APlaS</h1>
+            <h1 class="mb-1" style="font-family: Leckerli One,serif; font-style: italic; color: #fbc909!important;">Famima - APlaS</h1>
             <h3 class="mb-5">
-                <em>Aplikasi Inventori Academic Planning Skill Siswa SMA</em>
+                <i style="font-family: Caveat Brush,serif;">Aplikasi Inventori Academic Planning Skill Siswa SMA</i>
             </h3>
-            <a class="btn btn-secondary btn-xl js-scroll-trigger" href="#services">Mulai Sekarang</a>
+            <a class="btn btn-secondary btn-xl js-scroll-trigger" href="#about">Mulai Sekarang</a>
         </div>
         <div class="overlay"></div>
     </header>
@@ -49,10 +53,10 @@
         <div class="container text-center" style="background-color:#41344f !important;">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2 style="color: #fbc909!important;font-family: Yatra One,serif;">Mengantarkan anda memahami Academic Planning Skill</h2>
+                    <h2 style="color: #fbc909!important;font-family: Leckerli One,serif;">Mengantarkan anda memahami Academic Planning Skill</h2>
                     <br>
                     <p style="color: white; text-align: left; font-family: Caveat Brush,serif; font-size: 20px" class="lead mb-5">
-                        Keterampilan membuat rencana adalah keterampilan yang dimiliki individu untuk menyelesaikan suatu tugas ke akhir yang diinginkan (capezio, 2004). Skill atau keterampilan adalah keahlian mengerjakan tugas secara mudah dan cermat (hendriani dan Nulhaqim, 2008 : 158)
+                        Keterampilan membuat rencana adalah keterampilan yang dimiliki individu untuk menyelesaikan suatu tugas ke akhir yang diinginkan (capezio, 2004). Skill atau keterampilan adalah keahlian mengerjakan tugas secara mudah dan cermat (hendriani dan Nulhaqim, 2008 : 158).
                     </p>
                     <br>
                     <p style="color: white; text-align: left; font-family: Caveat Brush,serif; font-size: 20px" class="lead mb-5">
@@ -77,9 +81,10 @@
     <section style="padding-top: 1rem; padding-bottom: 2rem; height: 750px" class="content-section bg-primary text-white text-center" id="services">
         <section class="callout" style="height: 725px; padding: 275px 0">
             <div class="container text-center">
-                <h3 class="mx-auto mb-5">Mulai Menggunakan Aplikasi
-                    <em>Famima</em>
-                                         - Inventori Academic Planning Skill
+                <h3 class="mx-auto mb-5" style="font-family: Leckerli One,serif;color: black">
+                    Aplikasi
+                    <i>Famima</i>
+                    - Inventori Academic Planning Skill
                 </h3>
                 <a class="btn btn-primary btn-xl" href="{{route('student.auth.register.create')}}">Daftar Akun Baru</a>
                 <a class="btn btn-primary btn-xl" href="{{route('student.auth.login.get')}}">Masuk Akun</a>
@@ -103,7 +108,7 @@
                                 <p style="font-weight: bold" class="mb-0">Prof. Dr. Nur Hidayah, M.Pd</p>
                             </span>
                         </span>
-                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/portfolio-3.jpg')}}" alt="">
+                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/prof.jpg')}}" alt="">
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -114,7 +119,7 @@
                                 <p style="font-weight: bold" class="mb-0">Juwita Finayanti, S.Pd</p>
                             </span>
                         </span>
-                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/portfolio-4.jpg')}}" alt="">
+                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/juwita.jpg')}}" alt="">
                     </a>
                 </div>
             </div>
@@ -123,7 +128,7 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Prof. Dr. Nur Hidayah, M.Pd</a>, Lahir di Gresik, 17 Agustus 1959 dan Bertempat tinggal di Perum Permata Hijau D/57. Memiliki Hobby Membaca dan Motto “ Be Your Self”. Telah selesai menempuh Pendidikan S-1, S-2, S-3 jurusan Bimbingan dan Konseling dan telah menjadi dosen dan guru besar Bimbingan dan Konseling Universitas Megeri Malang <br> email: nur.hidayah.fip@gmail.com; phone: 082132852538</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Prof. Dr. Nur Hidayah, M.Pd</a>, Lahir di Gresik, 17 Agustus 1959 dan Bertempat tinggal di Perum Permata Hijau D/57. Memiliki Hobby Membaca dan Motto “ Be Your Self”. Telah selesai menempuh Pendidikan S-1, S-2, S-3 jurusan Bimbingan dan Konseling dan telah menjadi dosen dan guru besar Bimbingan dan Konseling Universitas Megeri Malang <br> email: {!! $html->mailto('nur.hidayah.fip@gmail.com', 'nur.hidayah.fip@gmail.com')!!}; phone: 082132852538</p><br>
                             </span>
                         </span>
                     </a>
@@ -132,7 +137,7 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Juwita Finayanti, S.Pd</a>, Lahir di Trenggalek, 4 Juni 1992 dan Bertempat tinggal di Ds. Prigi RT. 51/ RW. 10 Kec. Watulimo Kab. Trenggalek. Memiliki Hobby Travelling dan Motto ”Selalu berusaha dan semangat”. Telah selesai menempuh Pendidikan S-1 jurusan Bimbingan dan Konseling dan sedang menyelesaikan studi S-2 Bimbingan dan Konseling di Universitas Megeri Malang <br> email: juwitafina92@gmail.com; phone: 085731290096</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Juwita Finayanti, S.Pd</a>, Lahir di Trenggalek, 4 Juni 1992 dan Bertempat tinggal di Ds. Prigi RT. 51/ RW. 10 Kec. Watulimo Kab. Trenggalek. Memiliki Hobby Travelling dan Motto ”Selalu berusaha dan semangat”. Telah selesai menempuh Pendidikan S-1 jurusan Bimbingan dan Konseling dan sedang menyelesaikan studi S-2 Bimbingan dan Konseling di Universitas Megeri Malang <br> email: {!! $html->mailto('juwitafina92@gmail.com', 'juwitafina92@gmail.com') !!}; phone: 085731290096</p><br>
                             </span>
                         </span>
                     </a>
@@ -170,7 +175,7 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Aidatul Fikriyah</a>, Lahir di Demak, 21 April 1998 dan Bertempat tinggal di Kroya Selatan RT. 002 RW. 002 Gebangarum Kec. Bonang Kab. Demak. Memiliki Hobby Travelling dan Motto ”Mari bersama menjadi baik”.<br> email: aidatulfikriyah04@gmail.com; phone: 089692023988</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Aidatul Fikriyah</a>, Lahir di Demak, 21 April 1998 dan Bertempat tinggal di Kroya Selatan RT. 002 RW. 002 Gebangarum Kec. Bonang Kab. Demak. Memiliki Hobby Travelling dan Motto ”Mari bersama menjadi baik”.<br> email: {!! $html->mailto('aidatulfikriyah04@gmail.com', 'aidatulfikriyah04@gmail.com') !!}; phone: 089692023988</p><br>
                             </span>
                         </span>
                     </a>
@@ -179,7 +184,7 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Fita Andriani</a>, Lahir di Malang, 04 Agustus 1997 dan Bertempat tinggal di Jl. Candi Badut No. 74 Mojolangu Kec. Lowokwaru Kota Malang. Memiliki Hobby Travelling dan Motto “Do The Best be Success”.<br> email: andrianifita11@gmail.com; phone: 081344848137</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Fita Andriani</a>, Lahir di Malang, 04 Agustus 1997 dan Bertempat tinggal di Jl. Candi Badut No. 74 Mojolangu Kec. Lowokwaru Kota Malang. Memiliki Hobby Travelling dan Motto “Do The Best be Success”.<br> email: {!! $html->mailto('andrianifita11@gmail.com', 'andrianifita11@gmail.com') !!}; phone: 081344848137</p><br>
                             </span>
                         </span>
                     </a>
@@ -214,7 +219,7 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Mila Yunita</a>, Lahir di Kediri, 26 Juni 1998 dan Bertempat tinggal di Dsn. Jagalan RT 09/ RW. 05 Kanigoro Kec. Kras Kab. Kediri. Memiliki Hobby Menyanyi  dan Motto :”jadi apapun kamu suatu saat, tetaplah berjalan dimuka bumi dengan  menunduk”.<br> email: milayunita02@gmail.com; phone: 082234934715</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Mila Yunita</a>, Lahir di Kediri, 26 Juni 1998 dan Bertempat tinggal di Dsn. Jagalan RT 09/ RW. 05 Kanigoro Kec. Kras Kab. Kediri. Memiliki Hobby Menyanyi  dan Motto :”jadi apapun kamu suatu saat, tetaplah berjalan dimuka bumi dengan  menunduk”.<br> email: {!! $html->mailto('milayunita02@gmail.com', 'milayunita02@gmail.com') !!}; phone: 082234934715</p><br>
                             </span>
                         </span>
                     </a>
@@ -223,12 +228,13 @@
                     <a class="portfolio-item2">
                         <span class="caption">
                             <span class="caption-content">
-                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Mitha Silvia Yuhanata</a>, Lahir di Gresik, Tulungagung, 25 Mei 1997 dan Bertempat tinggal di Desa Sumberingin Kidul RT 01/ RW. 03 Kec. Ngunut Kab. Tulungagung. Memiliki Hobby Membaca dan Motto “Berusaha, berdoa, dan bekerja”. <br> email: silviamitha53@yahoo.com; phone: 085736056990</p><br>
+                                <p style="border:3px; border-style:dotted; border-color:white; padding: 1em;font-family: Viga,serif;" class="mb-0"><a style="font-weight: bold" class="mb-0">Mitha Silvia Yuhanata</a>, Lahir di Gresik, Tulungagung, 25 Mei 1997 dan Bertempat tinggal di Desa Sumberingin Kidul RT 01/ RW. 03 Kec. Ngunut Kab. Tulungagung. Memiliki Hobby Membaca dan Motto “Berusaha, berdoa, dan bekerja”. <br> email: {!! $html->mailto('silviamitha53@yahoo.com', 'silviamitha53@yahoo.com') !!}; phone: 085736056990</p><br>
                             </span>
                         </span>
                     </a>
                 </div>
             </div>
+
             <div class="content-section-heading text-center">
                 <h4 Style="margin-top: 3rem;" class="text-secondary mb-0" style="color: #480671!important;">Pengembang Aplikasi</h4>
             </div>
@@ -241,7 +247,7 @@
                                 <p style="font-weight: bold" class="mb-0">Muhammad Syafiq, S.Kom</p>
                             </span>
                         </span>
-                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/portfolio-3.jpg')}}" alt="">
+                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/S.jpg')}}" alt="">
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -252,7 +258,7 @@
                                 <p style="font-weight: bold" class="mb-0">Husni Hanafi, S.Pd</p>
                             </span>
                         </span>
-                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/portfolio-4.jpg')}}" alt="">
+                        <img class="img-responsive img-thumbnail" height="467px" src="{{asset('/assets/baked/landingpage/img/h.jpg')}}" alt="">
                     </a>
                 </div>
             </div>
@@ -278,6 +284,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="footer text-center" style="background-color: #342d57!important;">
         <div class="container">
