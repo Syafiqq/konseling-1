@@ -84,13 +84,13 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                         <div class="col-lg-9">
                             <div class="radio">
                                 <label>
-                                    {!! $form->radio('gender', 'male', null, ['required' => true]); !!}
+                                    {!! $form->radio('gender', 'male', null, ['required' => true, 'class' => 'icheck']); !!}
                                     Laki - Laki
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    {!! $form->radio('gender', 'female', null, ['required' => true]); !!}
+                                    {!! $form->radio('gender', 'female', null, ['required' => true, 'class' => 'icheck']); !!}
                                     Perempuan
                                 </label>
                             </div>
@@ -124,7 +124,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                         <div class="col-lg-10 col-lg-offset-2">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" required>
+                                    <input type="checkbox" class="icheck" required>
                                     Saya mengisi data dengan benar dan sesuai identitas saya.
                                 </label>
                             </div>
