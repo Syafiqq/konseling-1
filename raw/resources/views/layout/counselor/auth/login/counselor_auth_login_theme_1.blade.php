@@ -58,7 +58,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
             <div class="registrationform">
                 {!! $form->open(['route' => 'student.auth.login.post', 'method' => 'post', 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend style="font-family: Yatra One; color: #ff9800!important;">Form Masuk Akun Konselor
+                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Masuk Akun Konselor
                         <i class="fa fa-pencil pull-right"></i>
                     </legend>
                     <div class="form-group">
