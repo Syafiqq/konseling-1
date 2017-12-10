@@ -46,6 +46,7 @@ if (!is_null($session->get('cbk_msg')))
     <script type="text/javascript" src="{{asset('/assets/vendor/nprogress/nprogress.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/vendor/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/baked/authentication/js/jquery.backstretch.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/baked/authentication/js/default-backstretch.min.js')}}"></script>
     <script type="text/javascript">
         {!! 'var sessionFlashdata = ' . json_encode($flashdata)!!}
     </script>
