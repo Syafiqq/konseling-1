@@ -10,6 +10,8 @@
 namespace App\Services;
 
 use App\Eloquent\User;
+use App\Eloquent\UserCounselors;
+use App\Eloquent\UserStudents;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Support\Facades\Validator;
 
@@ -57,6 +59,7 @@ class UserRegistrar implements Registrar
         $model->setAttribute('password', bcrypt($data['password']));
 
         $model->save();
+        $this->createProfile($model);
 
         return $model;
     }
@@ -64,6 +67,27 @@ class UserRegistrar implements Registrar
     public function setRole($role)
     {
         $this->role = $role;
+    }
+
+    private function createProfile(User $model)
+    {
+        switch ($this->role)
+        {
+            case 'counselor' :
+                {
+                    /** @var UserCounselors $profile */
+                    $profile = new UserCounselors();
+                    $model->counselor()->save($profile);
+                    break;
+                }
+            case 'student' :
+                {
+                    /** @var UserStudents $profile */
+                    $profile = new UserStudents();
+                    $model->student()->save($profile);
+                    break;
+                }
+        }
     }
 }
 
