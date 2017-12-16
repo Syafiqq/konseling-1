@@ -17,11 +17,12 @@ class ValidAuthRecovery
     {
         $credential = $request->get('credential', null);
         $token      = $request->get('token', null);
-        $user       = User::where('credential', '=', $credential)->where('lost_password', '=', $token)->count();
-        if ($user <= 0)
+        $user       = User::where('credential', '=', $credential)->where('lost_password', '=', $token)->first();
+        if ($user === null)
         {
             abort(404);
         }
+        $request->route()->setParameter('user', $user);
 
         return $next($request);
     }
