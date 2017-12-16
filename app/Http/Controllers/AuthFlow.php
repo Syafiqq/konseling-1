@@ -103,9 +103,16 @@ trait AuthFlow
 
         $theme = $this->theme ?: 'default';
         $theme = 'default';
-        $mail->queue("layout.email.lost.email_lost_$theme", compact('path'), function (Message $message) use ($user) {
-            $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
-        });
+        if (is_null($user->getAttribute('email')))
+        {
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Email anda tidak valid untuk melanjutkan proses']]);
+        }
+        else
+        {
+            $mail->queue("layout.email.lost.email_lost_$theme", compact('path'), function (Message $message) use ($user) {
+                $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
+            });
+        }
 
         return redirect()->back()->with('cbk_msg', ['notify' => ['Permintaan Perbaikan Akun telah dikirim di email']]);
     }
