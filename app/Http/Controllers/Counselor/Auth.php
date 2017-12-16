@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Counselor;
 
+use App\Eloquent\User;
 use App\Http\Controllers\AuthFlow;
 use App\Http\Controllers\Controller;
 
@@ -36,5 +37,14 @@ class Auth extends Controller
     public function defaultLoginPath()
     {
         return redirect()->route('counselor.auth.login.get', [$this->role]);
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function defaultRecoverPath(User $user)
+    {
+        return route('counselor.auth.recover.get', ['credential' => $user->getAttribute('credential'), 'token' => $user->getAttribute('lost_password')]);
     }
 }

@@ -24,6 +24,7 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
             $router->post('/register', ['middleware' => 'auth.role', 'uses' => 'Auth@registerStore', 'as' => 'counselor.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'counselor.auth.login.get']);
             $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
+            $router->get('/lost', ['uses' => 'Auth@getLost', 'as' => 'counselor.auth.lost.get']);
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
