@@ -131,7 +131,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #33db31; border-radius: 5px; text-align: center;">
-                                                                <a href="{{$path}}" target="_blank" style="display: inline-block; color: #ffffff; background-color: #33db31; border: solid 1px #33db31; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #33db31;">Setting Password Baru</a>
+                                                                <a href="{{route('student.auth.recover.get', ["credential={$user['credential']}", "token={$user['lost_password']}"])}}" target="_blank" style="display: inline-block; color: #ffffff; background-color: #33db31; border: solid 1px #33db31; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #33db31;">Setting Password Baru</a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
