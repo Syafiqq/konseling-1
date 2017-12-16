@@ -15,9 +15,13 @@ class ValidAuthRecovery
      */
     public function handle($request, Closure $next)
     {
+        $role       = $request->segment(1, null);
         $credential = $request->get('credential', null);
         $token      = $request->get('token', null);
-        $user       = User::where('credential', '=', $credential)->where('lost_password', '=', $token)->first();
+        $user       = User::where('credential', '=', $credential)
+            ->where('lost_password', '=', $token)
+            ->where('role', '=', $role)
+            ->first();
         if ($user === null)
         {
             abort(404);
