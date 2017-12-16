@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Student;
 
+use App\Eloquent\User;
 use App\Http\Controllers\AuthFlow;
 use App\Http\Controllers\Controller;
 
@@ -46,4 +47,15 @@ class Auth extends Controller
     {
         return redirect()->route('student.auth.login.get', [$this->role]);
     }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function defaultRecoverPath(User $user)
+    {
+        return route('student.auth.recover.get', ['credential' => $user->getAttribute('credential'), 'token' => $user->getAttribute('lost_password')]);
+    }
+
+
 }
