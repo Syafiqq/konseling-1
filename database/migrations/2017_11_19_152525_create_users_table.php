@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
             $this->schema->create(self::$tableName, function (Blueprint $table) use ($db) {
                 $table->increments('id');
                 $table->string('credential', 100)->unique();
-                $table->string('email', 100)->unique();
+                $table->string('email', 100)->nullable()->unique();
                 $table->string('name', 100);
                 $table->enum('gender', ['male', 'female']);
                 $table->enum('role', ['student', 'counselor']);
