@@ -110,6 +110,20 @@ trait AuthFlow
         return redirect()->back()->with('cbk_msg', ['notify' => ['Permintaan Perbaikan Akun telah dikirim di email']]);
     }
 
+
+    public function patchRecover($role, User $user, Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $user->setAttribute('password', bcrypt($request->get('password')));
+        $user->setAttribute('lost_password', null);
+        $user->save();
+
+        return redirect()->route("$role.auth.login.get")->with('cbk_msg', ['notify' => ['Password telah berhasil dirubah']]);
+    }
+
     /**
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string $response
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse $default
