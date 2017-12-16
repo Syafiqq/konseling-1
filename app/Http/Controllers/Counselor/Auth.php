@@ -23,6 +23,15 @@ class Auth extends Controller
         return view("layout.counselor.auth.register.counselor_auth_register_$this->theme");
     }
 
+    public function getLost()
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        var_dump(\Illuminate\Support\Facades\Session::get('cbk_msg', null));
+        $this->theme = 'default';
+
+        return view("layout.counselor.auth.lost.counselor_auth_lost_$this->theme");
+    }
+    
     /**
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
