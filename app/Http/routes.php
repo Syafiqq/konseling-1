@@ -52,6 +52,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
             $router->get('/lost', ['uses' => 'Auth@getLost', 'as' => 'student.auth.lost.get']);
             $router->post('/lost', ['middleware' => 'auth.role', 'uses' => 'Auth@postLost', 'as' => 'student.auth.lost.post']);
             $router->get('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@getRecover', 'as' => 'student.auth.recover.get']);
+            $router->patch('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@patchRecover', 'as' => 'student.auth.recover.patch']);
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
