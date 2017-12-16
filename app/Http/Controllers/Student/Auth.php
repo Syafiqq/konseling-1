@@ -22,6 +22,15 @@ class Auth extends Controller
         return view("layout.student.auth.register.student_auth_register_$this->theme");
     }
 
+    public function getLost()
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        var_dump(\Illuminate\Support\Facades\Session::get('cbk_msg', null));
+        $this->theme = 'default';
+
+        return view("layout.student.auth.lost.student_auth_lost_$this->theme");
+    }
+
     /**
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
