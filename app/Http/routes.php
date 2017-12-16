@@ -50,6 +50,7 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'student.auth.login.get']);
             $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
             $router->get('/lost', ['uses' => 'Auth@getLost', 'as' => 'student.auth.lost.get']);
+            $router->post('/lost', ['middleware' => 'auth.role', 'uses' => 'Auth@postLost', 'as' => 'student.auth.lost.post']);
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
