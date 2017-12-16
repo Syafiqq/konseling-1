@@ -57,7 +57,7 @@ class UserRegistrar implements Registrar
         $model->setAttribute('name', $data['name']);
         $model->setAttribute('gender', $data['gender']);
         $model->setAttribute('role', $data['role']);
-        $model->setAttribute('avatar', $model->generate($model->getAttribute('gender')));
+        $model->setAttribute('avatar', $model->generateAvatar($model->getAttribute('gender')));
         $model->setAttribute('password', bcrypt($data['password']));
 
         $model->save();
