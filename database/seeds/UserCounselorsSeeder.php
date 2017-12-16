@@ -24,6 +24,7 @@ class UserCounselorsSeeder extends Seeder
         if (!$user->where('credential', '=', $nip)->first())
         {
             $user->setAttribute('credential', $nip);
+            $user->setAttribute('email', null);
             $user->setAttribute('name', 'Husni Hanafi');
             $user->setAttribute('gender', 'male');
             $user->setAttribute('role', 'counselor');
