@@ -179,27 +179,21 @@ $now = \Carbon\Carbon::now();
                                 </thead>
                                 <tbody>
                                 @foreach($analytics as $analytic)
-                                    <?php
-                                    $pre_strong = $post_strong = '';
-                                    if (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])))
-                                    {
-                                        $pre_strong  = '<strong>';
-                                        $post_strong = '</strong>';
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td class="font-size-12px text-center">
-                                            {!! $pre_strong.$analytic['interval'].$post_strong!!}
-                                        </td>
-                                        <td class="font-size-12px text-center">
-                                            {!! $pre_strong.$analytic['class'].$post_strong!!}
-                                        </td>
-                                        <td class="font-size-12px text-left">
-                                            {!! $pre_strong.$analytic['description']['key'].$post_strong!!}
-                                            <br>
-                                            {!! $pre_strong.$analytic['description']['value'].$post_strong!!}
-                                        </td>
-                                    </tr>
+                                    @if (($accumulation > doubleval($analytic['guard']['min'])) && ($accumulation <= doubleval($analytic['guard']['max'])))
+                                        <tr>
+                                            <td class="font-size-12px text-center">
+                                                <strong>{!! $analytic['interval']!!}</strong>
+                                            </td>
+                                            <td class="font-size-12px text-center">
+                                                <strong>{!! $analytic['class']!!}</strong>
+                                            </td>
+                                            <td class="font-size-12px text-left">
+                                                <strong>{!! $analytic['description']['key']!!}</strong>
+                                                <br>
+                                                <strong>{!! $analytic['description']['value']!!}</strong>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>
