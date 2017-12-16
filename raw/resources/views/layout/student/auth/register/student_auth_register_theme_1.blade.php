@@ -78,6 +78,14 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="nip" class="col-lg-3 control-label">
+                            Email
+                        </label>
+                        <div class="col-lg-9">
+                            {!! $form->email('email', null, ['placeholder' => 'Email', 'required'=> true, 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-3 control-label">
                             Jenis Kelamin
                         </label>
