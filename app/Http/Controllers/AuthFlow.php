@@ -136,6 +136,12 @@ trait AuthFlow
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
     abstract public function defaultRedirectPath();
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    abstract public function defaultRecoverPath(User $user);
 }
 
 ?>
