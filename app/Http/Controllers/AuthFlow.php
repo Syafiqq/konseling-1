@@ -16,7 +16,10 @@ use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 trait AuthFlow
 {
@@ -76,6 +79,35 @@ trait AuthFlow
                     'email' => $this->getFailedLoginMessage(),
                 ]);
         }
+    }
+
+    /**
+     * @param Guard $auth
+     * @param Request $request
+     * @param string $role
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function postLost(Request $request, $role)
+    {
+        $this->validate($request, [
+            'credential' => 'required|exists:users,credential|max:100',
+            'role' => "required|in:{$role}",
+        ]);
+
+        /** @var User $user */
+        $user = User::where('credential', $request->get('credential'))->first();
+        $user->generateRecoveryCode()->save();
+        /** @var Mailer $mail */
+        $mail = Mail::getFacadeRoot();
+        $path = $this->defaultRecoverPath($user);
+
+        $theme = $this->theme ?: 'default';
+        $theme = 'default';
+        $mail->queue("layout.email.lost.email_lost_$theme", compact('user', 'path'), function (Message $message) use ($user) {
+            $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
+        });
+
+        return redirect()->back()->with('cbk_msg', ['notify' => ['Permintaan Perbaikan Akun telah dikirim di email']]);
     }
 
     /**
