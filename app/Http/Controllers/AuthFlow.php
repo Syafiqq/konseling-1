@@ -103,7 +103,7 @@ trait AuthFlow
 
         $theme = $this->theme ?: 'default';
         $theme = 'default';
-        $mail->queue("layout.email.lost.email_lost_$theme", compact('user', 'path'), function (Message $message) use ($user) {
+        $mail->queue("layout.email.lost.email_lost_$theme", compact('role', 'user', 'path'), function (Message $message) use ($user) {
             $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
         });
 
