@@ -57,7 +57,7 @@ $progress = round(($summaryCount - $isFinished) * 100.0 / $summaryCount, 1);
                         <h4>
                             <strong>{{$question->getAttribute('question')}}</strong>
                         </h4>
-                        @foreach($options as $option)
+                        @foreach($options->reverse() as $option)
                             {!! $form->radio('answer', $option->getAttribute('id'))!!}
                             {{$option->getAttribute('description')}}
                             {!! nl2br(PHP_EOL) !!}
