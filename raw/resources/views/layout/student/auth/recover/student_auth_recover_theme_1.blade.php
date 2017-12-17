@@ -4,11 +4,11 @@
 $form = \Collective\Html\FormFacade::getFacadeRoot();
 ?>
 @section('head-title')
-    <title>Login</title>
+    <title>Recover</title>
 @endsection
 
 @section('head-description')
-    <meta name="description" content="Login">
+    <meta name="description" content="Recover">
 @endsection
 
 @section('body-content')
@@ -32,13 +32,13 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                         <a href="{{route('root')}}">Kembali Ke Beranda</a>
                     </li>
                     <li>
-                        <a href="{{route('student.auth.register.create')}}">Daftar Akun Siswa</a>
-                    </li>
-                    <li>
-                        <a href="{{route('counselor.auth.register.create')}}">Daftar Akun Konselor</a>
+                        <a href="{{route('counselor.auth.login.get')}}">Masuk Akun Konselor</a>
                     </li>
                     <li>
                         <a href="{{route('student.auth.login.get')}}">Masuk Akun Siswa</a>
+                    </li>
+                    <li>
+                        <a href="{{route('counselor.auth.register.create')}}">Daftar Akun Konselor</a>
                     </li>
                 </ul>
             </div>
@@ -47,7 +47,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div id="banner">
-                <h1>Form Masuk Akun Aplikasi
+                <h1>Form Perubahan Password Aplikasi
                     <strong>Inventori Academic Planning Skill</strong>
                     <br>
                 </h1>
@@ -56,37 +56,30 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="registrationform">
-                {!! $form->open(['route' => 'counselor.auth.login.post', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+                {!! $form->open(['route' => ['student.auth.recover.patch', "credential={$user->getAttribute('credential')}", "token={$user->getAttribute('lost_password')}"], 'method' => 'patch', 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Masuk Akun Konselor
+                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Perubahan Password
                         <i class="fa fa-pencil pull-right"></i>
                     </legend>
                     <div class="form-group">
-                        <label for="nis" class="col-lg-12 control-label" style="font-size: medium; text-align: left">
-                            NIP / NIK
-                        </label>
-                        <div class="col-lg-12">
-                            {!! $form->input('text','credential', null, ['placeholder' => 'NIP / NIK Anda', 'required'=> true, 'class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-lg-12 control-label" style="font-size: medium; text-align: left">
+                        <label for="inputPassword" class="col-lg-3 control-label">
                             Kata Sandi
                         </label>
-                        <div class="col-lg-12">
-                            {!! $form->password('password', ['placeholder' => 'Kata Sandi Akun Anda', 'required'=> true, 'class' => 'form-control']) !!}
+                        <div class="col-lg-9">
+                            {!! $form->password('password', ['placeholder' => 'Kata Sandi', 'required'=> true, 'class'=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-12">
-                            {!! $form->button('Masuk', ['type' => 'Submit', 'class' => 'btn btn-primary']) !!}
+                        <label for="inputPassword" class="col-lg-3 control-label">
+                            Ketik Ulang Kata Sandi
+                        </label>
+                        <div class="col-lg-9">
+                            {!! $form->password('password_confirmation', ['placeholder' => 'Ketik Ulang Kata Sandi', 'required'=> true, 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-12">
-                            <h5 style="font-size: medium;color: white;">Lupa Kata Sandi
-                                {!! link_to_route('counselor.auth.lost.get', 'Klik Disini !', [], ['style' =>'color:inherit']) !!}
-                            </h5>
+                        <div class="col-lg-10 col-lg-offset-2">
+                            {!! $form->button('Ubah Password', ['type' => 'Submit', 'class' => 'btn btn-success']) !!}
                         </div>
                     </div>
                 </fieldset>
@@ -98,10 +91,10 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
 
 @section('head-css-post')
     @parent
-    <link rel="stylesheet" href="{{asset('/assets/css/layout/counselor/auth/login/counselor_auth_login_theme_1.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/layout/student/auth/register/student_auth_register_theme_1.min.css')}}">
 @endsection
 
 @section('body-js-lower-post')
     @parent
-    <script type="text/javascript" src="{{asset('/assets/js/layout/counselor/auth/login/counselor_auth_login_theme_1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/js/layout/student/auth/register/student_auth_register_theme_1.min.js')}}"></script>
 @endsection

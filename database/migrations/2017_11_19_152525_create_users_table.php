@@ -40,11 +40,13 @@ class CreateUsersTable extends Migration
             $this->schema->create(self::$tableName, function (Blueprint $table) use ($db) {
                 $table->increments('id');
                 $table->string('credential', 100)->unique();
+                $table->string('email', 100)->nullable()->unique();
                 $table->string('name', 100);
                 $table->enum('gender', ['male', 'female']);
                 $table->enum('role', ['student', 'counselor']);
                 $table->string('avatar', 100)->nullable();
                 $table->string('password', 60);
+                $table->string('lost_password', 100)->nullable();
                 $table->rememberToken();
                 $table->timestamp('created_at')->default($db->raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default($db->raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

@@ -22,7 +22,7 @@ class UserStudentsSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['credential' => '10000', 'name' => 'Abdul Fatah', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]]
+            ['credential' => '10000', 'email' => 'syafiq.rezpector@gmail.com', 'name' => 'Abdul Fatah', 'gender' => 'male', 'role' => 'student', 'avatar' => $this->generate('male'), 'password' => bcrypt('12345678'), 'student' => ['school' => 'UM', 'grade' => '10', 'active' => 1]]
         ];
 
         /** @var \Illuminate\Database\Query\Builder $model */

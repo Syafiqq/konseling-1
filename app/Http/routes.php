@@ -24,6 +24,10 @@ $router->group(['namespace' => 'Counselor', 'prefix' => '/counselor'], function 
             $router->post('/register', ['middleware' => 'auth.role', 'uses' => 'Auth@registerStore', 'as' => 'counselor.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'counselor.auth.login.get']);
             $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'counselor.auth.login.post']);
+            $router->get('/lost', ['uses' => 'Auth@getLost', 'as' => 'counselor.auth.lost.get']);
+            $router->post('/lost', ['middleware' => 'auth.role', 'uses' => 'Auth@postLost', 'as' => 'counselor.auth.lost.post']);
+            $router->get('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@getRecover', 'as' => 'counselor.auth.recover.get']);
+            $router->patch('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@patchRecover', 'as' => 'counselor.auth.recover.patch']);
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {
@@ -49,6 +53,10 @@ $router->group(['namespace' => 'Student', 'prefix' => '/student'], function () u
             $router->post('/register', ['middleware' => 'auth.role', 'uses' => 'Auth@registerStore', 'as' => 'student.auth.register.store']);
             $router->get('/login', ['uses' => 'Auth@getLogin', 'as' => 'student.auth.login.get']);
             $router->post('/login', ['middleware' => 'auth.role', 'uses' => 'Auth@postLogin', 'as' => 'student.auth.login.post']);
+            $router->get('/lost', ['uses' => 'Auth@getLost', 'as' => 'student.auth.lost.get']);
+            $router->post('/lost', ['middleware' => 'auth.role', 'uses' => 'Auth@postLost', 'as' => 'student.auth.lost.post']);
+            $router->get('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@getRecover', 'as' => 'student.auth.recover.get']);
+            $router->patch('/recover', ['middleware' => ['auth.role', 'valid.auth.recovery'], 'uses' => 'Auth@patchRecover', 'as' => 'student.auth.recover.patch']);
         });
     });
     $router->group(['middleware' => 'authenticated.source'], function () use ($router) {

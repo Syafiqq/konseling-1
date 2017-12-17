@@ -16,7 +16,10 @@ use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 trait AuthFlow
 {
@@ -79,6 +82,56 @@ trait AuthFlow
     }
 
     /**
+     * @param Guard $auth
+     * @param Request $request
+     * @param string $role
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function postLost(Request $request, $role)
+    {
+        $this->validate($request, [
+            'credential' => 'required|exists:users,credential|max:100',
+            'role' => "required|in:{$role}",
+        ]);
+
+        /** @var User $user */
+        $user = User::where('credential', $request->get('credential'))->first();
+        $user->generateRecoveryCode()->save();
+        /** @var Mailer $mail */
+        $mail = Mail::getFacadeRoot();
+        $path = $this->defaultRecoverPath($user);
+
+        $theme = $this->theme ?: 'default';
+        $theme = 'default';
+        if (is_null($user->getAttribute('email')))
+        {
+            return redirect()->back()->with('cbk_msg', ['notify' => ['Email anda tidak valid untuk melanjutkan proses']]);
+        }
+        else
+        {
+            $mail->queue("layout.email.lost.email_lost_$theme", compact('path'), function (Message $message) use ($user) {
+                $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
+            });
+        }
+
+        return redirect()->back()->with('cbk_msg', ['notify' => ['Permintaan Perbaikan Akun telah dikirim di email']]);
+    }
+
+
+    public function patchRecover($role, User $user, Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $user->setAttribute('password', bcrypt($request->get('password')));
+        $user->setAttribute('lost_password', null);
+        $user->save();
+
+        return redirect()->route("$role.auth.login.get")->with('cbk_msg', ['notify' => ['Password telah berhasil dirubah']]);
+    }
+
+    /**
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string $response
      * @param \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse $default
      * @param null $callback
@@ -136,6 +189,12 @@ trait AuthFlow
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
     abstract public function defaultRedirectPath();
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    abstract public function defaultRecoverPath(User $user);
 }
 
 ?>
