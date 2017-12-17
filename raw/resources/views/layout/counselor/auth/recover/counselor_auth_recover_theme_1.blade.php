@@ -91,10 +91,10 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
 
 @section('head-css-post')
     @parent
-    <link rel="stylesheet" href="{{asset('/assets/css/layout/counselor/auth/register/counselor_auth_register_theme_1.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/layout/counselor/auth/recover/counselor_auth_recover_theme_1.min.css')}}">
 @endsection
 
 @section('body-js-lower-post')
     @parent
-    <script type="text/javascript" src="{{asset('/assets/js/layout/counselor/auth/register/counselor_auth_register_theme_1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/js/layout/counselor/auth/recover/counselor_auth_recover_theme_1.min.js')}}"></script>
 @endsection
