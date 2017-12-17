@@ -1,8 +1,10 @@
 (function ($) {
     $(function () {
         var current_audio;
-        var current_index = 0;
-        var current_time  = 0;
+        var current_index = Cookies.get('audio_current_index');
+        var current_time  = Cookies.get('audio_current_time');
+        current_index     = current_index === undefined ? 0 : current_index;
+        current_time      = current_time === undefined ? 0 : current_time;
 
         init();
 
@@ -29,7 +31,7 @@
                 run($(current_anchor = playlist.find('a')[current_index]), current_audio, current_time);
             });
 
-            run($(current_anchor = playlist.find('a')[current_index = 0]), current_audio, current_time)
+            run($(current_anchor = playlist.find('a')[current_index]), current_audio, current_time)
         }
 
         function run(link, player, track)
@@ -38,13 +40,13 @@
             var par    = link.parent();
             par.addClass('active').siblings().removeClass('active');
             player.load();
-            player.volume      = 0;
             player.currentTime = parseFloat(track);
             player.play();
         }
 
         $(window).on("beforeunload", function (e) {
-            
+            Cookies.set('audio_current_index', current_index);
+            Cookies.set('audio_current_time', current_audio.currentTime);
         });
     });
 })(jQuery);
