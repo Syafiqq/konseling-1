@@ -33,6 +33,7 @@ class UserRegistrar implements Registrar
 
         return $validator->make($data, [
             'credential' => 'required|max:100|unique:users',
+            'email' => 'required|max:100|email|unique:users',
             'name' => 'required|max:100',
             'gender' => 'required|in:male,female',
             'role' => "required|in:{$this->role}",
@@ -52,10 +53,11 @@ class UserRegistrar implements Registrar
         /** @var User $model */
         $model = new User;
         $model->setAttribute('credential', $data['credential']);
+        $model->setAttribute('email', $data['email']);
         $model->setAttribute('name', $data['name']);
         $model->setAttribute('gender', $data['gender']);
         $model->setAttribute('role', $data['role']);
-        $model->setAttribute('avatar', $model->generate($model->getAttribute('gender')));
+        $model->setAttribute('avatar', $model->generateAvatar($model->getAttribute('gender')));
         $model->setAttribute('password', bcrypt($data['password']));
 
         $model->save();

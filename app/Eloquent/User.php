@@ -1,12 +1,18 @@
 <?php namespace App\Eloquent;
 
+use App\Generators\CouponGenerator;
 use App\Generators\DefaultAvatarGenerator;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements Authenticatable
 {
-    use DefaultAvatarGenerator;
+    use DefaultAvatarGenerator, CouponGenerator
+    {
+        DefaultAvatarGenerator::generate insteadof CouponGenerator;
+        DefaultAvatarGenerator::generate as generateAvatar;
+        CouponGenerator::generate as generateCoupon;
+    }
     /**
      * @var bool
      */
@@ -161,6 +167,17 @@ class User extends Model implements Authenticatable
     public function setRememberToken($value)
     {
         $this->setAttribute($this->getRememberTokenName(), $value);
+    }
+
+    /**
+     * @return User
+     */
+    public function generateRecoveryCode()
+    {
+
+        $this->setAttribute('lost_password', $this->generateCoupon());
+
+        return $this;
     }
 
     /**

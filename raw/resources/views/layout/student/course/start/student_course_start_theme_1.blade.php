@@ -57,7 +57,7 @@ $progress = round(($summaryCount - $isFinished) * 100.0 / $summaryCount, 1);
                         <h4>
                             <strong>{{$question->getAttribute('question')}}</strong>
                         </h4>
-                        @foreach($options as $option)
+                        @foreach($options->reverse() as $option)
                             {!! $form->radio('answer', $option->getAttribute('id'))!!}
                             {{$option->getAttribute('description')}}
                             {!! nl2br(PHP_EOL) !!}
@@ -104,9 +104,9 @@ $progress = round(($summaryCount - $isFinished) * 100.0 / $summaryCount, 1);
                         <div class="btn-group" role=group aria-label="question-track">
                             @foreach($summary as $answer_detail)
                                 <?php
-                                $isCompleted = is_null($answer_detail->getAttribute('answer')) ? 'default' : 'success';
+                                $isCompleted = is_null($answer_detail->getAttribute('answer')) ? 'default' : (intval($answer_detail->getAttribute('question')) === intval($question->getAttribute('id')) ? 'primary' : 'success');
                                 ?>
-                                {!! link_to_route('student.course.start.edit', $answer_detail->getAttribute('question'), [$answer_detail->getAttribute('question')], ['class' => "btn btn-$isCompleted"]); !!}
+                                {!! link_to_route('student.course.start.edit', $answer_detail->getAttribute('question'), [$answer_detail->getAttribute('question')], ['class' => "btn btn-$isCompleted width-40px"]); !!}
                             @endforeach
                         </div>
                     </div>

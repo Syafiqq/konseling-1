@@ -82,6 +82,13 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
                             {!! $form->button('Masuk', ['type' => 'Submit', 'class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <h5 style="font-size: medium;color: white;">Lupa Kata Sandi
+                                {!! link_to_route('counselor.auth.lost.get', 'Klik Disini !', [], ['style' =>'color:inherit']) !!}
+                            </h5>
+                        </div>
+                    </div>
                 </fieldset>
                 {!! $form->close() !!}
             </div>

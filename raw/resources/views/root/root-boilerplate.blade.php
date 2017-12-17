@@ -44,4 +44,5 @@
     <script type="text/javascript">window.jQuery || document.write('<script src="{{asset('/assets/vendor/jquery/dist/jquery.min.js')}}"><\/script>')</script>
     {{-- Plugins --}}
     <script type="text/javascript" src="{{asset('/assets/vendor/html5-boilerplate/dist/js/plugins.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/vendor/js-cookie/src/js.cookie.min.js')}}"></script>
 @endsection

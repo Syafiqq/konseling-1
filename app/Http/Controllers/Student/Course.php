@@ -91,8 +91,32 @@ class Course extends Controller
         return view("layout.student.course.start.student_course_start_$this->theme", compact('prev', 'current', 'next', 'question', 'options', 'summary'));
     }
 
+    /**
+     * @param $question
+     * @param AnswerDetail $answer
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function startUpdate($question, AnswerDetail $answer, Request $request)
     {
+        /**
+         * @param $question
+         * @return \Illuminate\Http\RedirectResponse
+         */
+        function resolveNext($question)
+        {
+            /** @var AnswerDetail $next */
+            $next = \Illuminate\Support\Facades\Auth::user()->getAttribute('answer')->last()->answer_detail()->skip($question)->take(1)->first();
+            if (is_null($next))
+            {
+                return redirect()->back();
+            }
+            else
+            {
+                return redirect()->route('student.course.start.edit', [$next->getAttribute('question')]);
+            }
+        }
+
         /** @var Question $question */
         $question = Question::where('id', '=', intval($question))->first();
         $scale    = QuestionOption::all()->count();
@@ -109,7 +133,7 @@ class Course extends Controller
         }
         $answer->save();
 
-        return redirect()->back()->with('cbk_msg', ['notify' => ['Jawaban Berhasil Disimpan']]);
+        return resolveNext($question->getKey())->with('cbk_msg', ['notify' => ['Jawaban Berhasil Disimpan']]);
     }
 
     public function submit()
