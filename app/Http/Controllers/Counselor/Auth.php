@@ -30,10 +30,6 @@ class Auth extends Controller
 
     public function getRecover($role, User $user)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(\Illuminate\Support\Facades\Session::get('cbk_msg', null));
-        $this->theme = 'default';
-
         return view("layout.counselor.auth.recover.counselor_auth_recover_$this->theme", compact('user'));
     }
 
