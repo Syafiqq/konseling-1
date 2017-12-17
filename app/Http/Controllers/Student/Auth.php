@@ -25,10 +25,6 @@ class Auth extends Controller
 
     public function getLost()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(\Illuminate\Support\Facades\Session::get('cbk_msg', null));
-        $this->theme = 'default';
-
         return view("layout.student.auth.lost.student_auth_lost_$this->theme");
     }
 
