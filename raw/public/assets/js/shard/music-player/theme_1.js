@@ -20,7 +20,8 @@
                 e.preventDefault();
                 current_anchor = $(this);
                 current_index  = current_anchor.parent().index();
-                run(current_anchor, current_audio, 0);
+                current_time   = 0;
+                run(current_anchor, current_audio, current_time);
             });
             current_audio.addEventListener('ended', function (e) {
                 current_index++;
@@ -28,6 +29,7 @@
                 {
                     current_index = 0;
                 }
+                current_time = 0;
                 run($(current_anchor = playlist.find('a')[current_index]), current_audio, current_time);
             });
 
