@@ -47,7 +47,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div id="banner">
-                <h1>Form Pendaftaran Akun Aplikasi
+                <h1>Form Permintaan Perubahan Password Aplikasi
                     <strong>Inventori Academic Planning Skill</strong>
                     <br>
                 </h1>
