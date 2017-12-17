@@ -1,48 +1,50 @@
 (function ($) {
     $(function () {
-        var audio;
-        var playlist;
-        var tracks;
-        var current;
+        var current_audio;
+        var current_index = 0;
+        var current_time  = 0;
 
         init();
 
         function init()
         {
-            audio           = $('#audio');
-            playlist        = $('#playlist');
-            tracks          = playlist.find('li a');
-            current         = Math.ceil(Math.random() * tracks.length);
-            len             = tracks.length;
-            audio[0].volume = 0.5;
-            audio[0].play();
+            var audio     = $('#audio');
+            current_audio = audio[0];
+            var playlist  = $('#playlist');
+            var len       = playlist.find('li a').length;
+            var current_anchor;
+
             playlist.find('a').click(function (e) {
                 e.preventDefault();
-                link    = $(this);
-                current = link.parent().index();
-                run(link, audio[0]);
+                current_anchor = $(this);
+                current_index  = current_anchor.parent().index();
+                run(current_anchor, current_audio, 0);
             });
-            audio[0].addEventListener('ended', function (e) {
-                current++;
-                if (current == len)
+            current_audio.addEventListener('ended', function (e) {
+                current_index++;
+                if (current_index === len)
                 {
-                    current = 0;
-                    link    = playlist.find('a')[0];
-                } else
-                {
-                    link = playlist.find('a')[current];
+                    current_index = 0;
                 }
-                run($(link), audio[0]);
+                run($(current_anchor = playlist.find('a')[current_index]), current_audio, current_time);
             });
+
+            run($(current_anchor = playlist.find('a')[current_index = 0]), current_audio, current_time)
         }
 
-        function run(link, player)
+        function run(link, player, track)
         {
             player.src = link.attr('href');
-            par        = link.parent();
+            var par    = link.parent();
             par.addClass('active').siblings().removeClass('active');
-            audio[0].load();
-            audio[0].play();
+            player.load();
+            player.volume      = 0;
+            player.currentTime = parseFloat(track);
+            player.play();
         }
+
+        $(window).on("beforeunload", function (e) {
+            
+        });
     });
 })(jQuery);
