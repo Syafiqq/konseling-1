@@ -47,7 +47,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
             <div id="banner">
-                <h1>Form Permintaan Perubahan Password
+                <h1>Form Pendaftaran Akun Aplikasi
                     <strong>Inventori Academic Planning Skill</strong>
                     <br>
                 </h1>
@@ -58,7 +58,7 @@ $form = \Collective\Html\FormFacade::getFacadeRoot();
             <div class="registrationform">
                 {!! $form->open(['route' => 'counselor.auth.lost.post', 'method' => 'post', 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Perbaikan Akun Konselor
+                    <legend style="font-family: Yatra One,serif; color: #ff9800!important;">Form Permintaan Perubahan Password
                         <i class="fa fa-pencil pull-right"></i>
                     </legend>
                     <div class="form-group">
