@@ -14,7 +14,7 @@ $musics = [
 ?>
 <div id="cover">
     <div class="panel panel-default">
-        <audio id="audio" autoplay preload="auto" tabindex="0" controls>
+        <audio id="audio" tabindex="0" controls>
             <source src="{{$musics[0]['source']}}">
         </audio>
     </div>
