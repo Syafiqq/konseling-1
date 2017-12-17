@@ -25,10 +25,6 @@ class Auth extends Controller
 
     public function getLost()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        var_dump(\Illuminate\Support\Facades\Session::get('cbk_msg', null));
-        $this->theme = 'default';
-
         return view("layout.counselor.auth.lost.counselor_auth_lost_$this->theme");
     }
 
@@ -40,7 +36,7 @@ class Auth extends Controller
 
         return view("layout.counselor.auth.recover.counselor_auth_recover_$this->theme", compact('user'));
     }
-    
+
     /**
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|string
      */
