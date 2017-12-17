@@ -16,10 +16,7 @@ use App\Services\UserRegistrar;
 use Illuminate\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Mailer;
-use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 trait AuthFlow
 {
@@ -82,7 +79,6 @@ trait AuthFlow
     }
 
     /**
-     * @param Guard $auth
      * @param Request $request
      * @param string $role
      * @return $this|\Illuminate\Http\RedirectResponse
@@ -96,25 +92,16 @@ trait AuthFlow
 
         /** @var User $user */
         $user = User::where('credential', $request->get('credential'))->first();
-        $user->generateRecoveryCode()->save();
-        /** @var Mailer $mail */
-        $mail = Mail::getFacadeRoot();
+        $user->generateRecoveryCode()->save();;
         $path = $this->defaultRecoverPath($user);
-
-        $theme = $this->theme ?: 'default';
-        $theme = 'default';
         if (is_null($user->getAttribute('email')))
         {
             return redirect()->back()->with('cbk_msg', ['notify' => ['Email anda tidak valid untuk melanjutkan proses']]);
         }
         else
         {
-            $mail->queue("layout.email.lost.email_lost_$theme", compact('path'), function (Message $message) use ($user) {
-                $message->to($user->getAttribute('email'), $user->getAttribute('name'))->subject('Password Recovery');
-            });
+            return redirect($path);
         }
-
-        return redirect()->back()->with('cbk_msg', ['notify' => ['Permintaan Perbaikan Akun telah dikirim di email']]);
     }
 
 
