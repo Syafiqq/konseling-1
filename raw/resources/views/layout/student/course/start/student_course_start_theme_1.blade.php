@@ -104,7 +104,7 @@ $progress = round(($summaryCount - $isFinished) * 100.0 / $summaryCount, 1);
                         <div class="btn-group" role=group aria-label="question-track">
                             @foreach($summary as $answer_detail)
                                 <?php
-                                $isCompleted = is_null($answer_detail->getAttribute('answer')) ? 'default' : (intval($answer_detail->getAttribute('question')) === intval($question->getAttribute('id')) ? 'primary' : 'success');
+                                $isCompleted = (intval($answer_detail->getAttribute('question')) === intval($question->getAttribute('id'))) ? 'primary' : (is_null($answer_detail->getAttribute('answer')) ? 'default' : 'success');
                                 ?>
                                 {!! link_to_route('student.course.start.edit', $answer_detail->getAttribute('question'), [$answer_detail->getAttribute('question')], ['class' => "btn btn-$isCompleted width-40px"]); !!}
                             @endforeach
