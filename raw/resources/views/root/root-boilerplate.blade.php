@@ -18,7 +18,7 @@
 
 @section('head-js-post')
     {{--Modernizr--}}
-    <script type="text/javascript" src="{{asset('/assets/vendor/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/vendor/html5-boilerplate/dist/js/vendor/modernizr-3.6.0.min.js')}}"></script>
     {{-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --}}
     {{-- WARNING: Respond.js doesn't work if you view the page via file:// --}}
     <!--[if lt IE 9]>
